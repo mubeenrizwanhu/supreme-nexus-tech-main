@@ -28,9 +28,9 @@ Transform the current website into a **futuristic, highly dynamic, and interacti
 ## ✅ Implementation Checklist
 
 ### Phase 1: Foundation & Dependencies
-- [ ] Install `three`, `@react-three/fiber`, and `@react-three/drei` (or `vanta`).
-- [ ] Install `framer-motion` for advanced UI animations.
-- [ ] Install `lucide-react` (if not already present) for sleek iconography.
+- [x] Install `three`, `@react-three/fiber`, and `@react-three/drei` (or `vanta`).
+- [x] Install `framer-motion` for advanced UI animations.
+- [x] Install `lucide-react` (if not already present) for sleek iconography.
 
 ### Phase 2: The Futuristic Background
 - [ ] Create a `FuturisticBackground.tsx` component.
