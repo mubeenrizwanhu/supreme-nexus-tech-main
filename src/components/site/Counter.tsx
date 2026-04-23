@@ -8,7 +8,13 @@ interface CounterProps {
   decimals?: number;
 }
 
-export function Counter({ to, suffix = "", prefix = "", duration = 1600, decimals = 0 }: CounterProps) {
+export function Counter({
+  to,
+  suffix = "",
+  prefix = "",
+  duration = 1600,
+  decimals = 0,
+}: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const [val, setVal] = useState(0);
   const startedRef = useRef(false);

@@ -115,22 +115,32 @@ export function HeroVisual() {
         </svg>
 
         {/* Floating data chips */}
-        <div className="absolute left-5 top-5 flex items-center gap-2 rounded-md border bg-background/40 px-2.5 py-1.5 backdrop-blur-md"
-             style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+        <div
+          className="absolute left-5 top-5 flex items-center gap-2 rounded-md border bg-background/40 px-2.5 py-1.5 backdrop-blur-md"
+          style={{ borderColor: "rgba(255,255,255,0.08)" }}
+        >
           <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--success)] animate-pulse-dot" />
-          <span className="font-mono text-[10px] uppercase tracking-widest text-muted">live · cvr</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-muted">
+            live · cvr
+          </span>
           <span className="font-display text-xs font-bold text-foreground">+182%</span>
         </div>
 
-        <div className="absolute bottom-5 right-5 flex items-center gap-2 rounded-md border bg-background/40 px-2.5 py-1.5 backdrop-blur-md"
-             style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+        <div
+          className="absolute bottom-5 right-5 flex items-center gap-2 rounded-md border bg-background/40 px-2.5 py-1.5 backdrop-blur-md"
+          style={{ borderColor: "rgba(255,255,255,0.08)" }}
+        >
           <span className="font-mono text-[10px] uppercase tracking-widest text-muted">booked</span>
           <span className="font-display text-xs font-bold text-[color:var(--primary)]">+47</span>
         </div>
 
-        <div className="absolute right-5 top-5 rounded-md border bg-background/40 px-2.5 py-1.5 backdrop-blur-md"
-             style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-muted">funnel · v3</span>
+        <div
+          className="absolute right-5 top-5 rounded-md border bg-background/40 px-2.5 py-1.5 backdrop-blur-md"
+          style={{ borderColor: "rgba(255,255,255,0.08)" }}
+        >
+          <span className="font-mono text-[10px] uppercase tracking-widest text-muted">
+            funnel · v3
+          </span>
         </div>
       </div>
     </div>

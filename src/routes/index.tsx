@@ -183,7 +183,7 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 md:grid-cols-12 md:px-8">
         <div className="md:col-span-7">
-          <div className="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-elevated/60 px-3 py-1.5 backdrop-blur">
+          <div className="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-elevated/40 px-4 py-2 backdrop-blur-md shadow-[0_0_20px_-5px_color-mix(in_oklab,var(--primary)_20%,transparent)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--primary)] animate-pulse-dot" />
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
               Conversion systems · built to book
@@ -196,16 +196,15 @@ function Hero() {
               <span
                 className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full"
                 style={{
-                  background:
-                    "linear-gradient(90deg, transparent, var(--primary), transparent)",
+                  background: "linear-gradient(90deg, transparent, var(--primary), transparent)",
                 }}
               />
             </span>
           </h1>
           <p className="reveal mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-            Supreme Nexus engineers conversion-focused systems that turn your traffic
-            into qualified leads and booked opportunities — through funnel optimization,
-            lead capture, and appointment flow.
+            Supreme Nexus engineers conversion-focused systems that turn your traffic into qualified
+            leads and booked opportunities — through funnel optimization, lead capture, and
+            appointment flow.
           </p>
 
           <div className="reveal mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
@@ -234,7 +233,7 @@ const SIGNALS = [
 
 function CredibilityStrip() {
   return (
-    <section className="border-y border-[color:var(--border)] bg-surface/40">
+    <section className="border-y border-[color:var(--border)] bg-surface/20 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid grid-cols-2 divide-y divide-[color:var(--border)] sm:grid-cols-3 sm:divide-y-0 sm:divide-x lg:grid-cols-5">
           {SIGNALS.map((s, i) => (
@@ -242,9 +241,7 @@ function CredibilityStrip() {
               key={s}
               className={`flex items-center gap-3 px-4 py-5 ${i >= 2 ? "border-t border-[color:var(--border)] sm:border-t-0" : ""}`}
             >
-              <span className="font-mono text-[10px] text-[color:var(--primary)]">
-                0{i + 1}
-              </span>
+              <span className="font-mono text-[10px] text-[color:var(--primary)]">0{i + 1}</span>
               <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
                 {s}
               </span>
@@ -287,9 +284,7 @@ function ProblemOutcome() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          <div
-            className="reveal rounded-2xl border border-[color:var(--border)] bg-surface p-7 md:p-9"
-          >
+          <div className="reveal rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9">
             <div className="mb-5 flex items-center gap-2">
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
                 What's leaking
@@ -306,7 +301,7 @@ function ProblemOutcome() {
           </div>
 
           <div
-            className="reveal rounded-2xl border p-7 md:p-9"
+            className="reveal rounded-2xl border p-7 md:p-9 backdrop-blur-md"
             style={{
               borderColor: "color-mix(in oklab, var(--primary) 30%, transparent)",
               background:
@@ -380,8 +375,8 @@ function Services() {
             </h2>
           </div>
           <p className="max-w-sm text-sm text-muted md:text-base">
-            Six interlocking levers. Pulled together, they turn marketing spend into
-            qualified pipeline.
+            Six interlocking levers. Pulled together, they turn marketing spend into qualified
+            pipeline.
           </p>
         </div>
 
@@ -389,7 +384,7 @@ function Services() {
           {SERVICES.map((s, i) => (
             <div
               key={s.name}
-              className="reveal group relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-surface p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--primary)]/40"
+              className="reveal group relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--primary)]/60 hover:shadow-[0_0_30px_-5px_color-mix(in_oklab,var(--primary)_40%,transparent)]"
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -430,7 +425,10 @@ const STEPS = [
 
 function Process() {
   return (
-    <section id="process" className="border-y border-[color:var(--border)] bg-surface/30 py-24 md:py-32">
+    <section
+      id="process"
+      className="border-y border-[color:var(--border)] bg-surface/10 backdrop-blur-sm py-24 md:py-32"
+    >
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="reveal mb-16 max-w-xl">
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
@@ -453,7 +451,7 @@ function Process() {
           <div className="grid gap-10 md:grid-cols-4 md:gap-6">
             {STEPS.map((s) => (
               <div key={s.n} className="reveal relative">
-                <div className="relative z-10 mb-5 flex h-[68px] w-[68px] items-center justify-center rounded-2xl border border-[color:var(--border)] bg-elevated">
+                <div className="relative z-10 mb-5 flex h-[68px] w-[68px] items-center justify-center rounded-2xl border border-[color:var(--border)] bg-elevated/40 backdrop-blur-md shadow-[0_0_20px_-5px_color-mix(in_oklab,var(--primary)_20%,transparent)]">
                   <span className="font-display text-2xl font-bold text-[color:var(--primary)]">
                     {s.n}
                   </span>
@@ -503,8 +501,8 @@ function Results() {
             Performance you can measure.
           </h2>
           <p className="mt-4 text-sm text-muted md:text-base">
-            Representative ranges from conversion engagements. Numbers vary by offer,
-            traffic quality, and current funnel maturity.
+            Representative ranges from conversion engagements. Numbers vary by offer, traffic
+            quality, and current funnel maturity.
           </p>
         </div>
 
@@ -512,7 +510,7 @@ function Results() {
           {METRICS.map((m) => (
             <div
               key={m.label}
-              className="reveal rounded-2xl border border-[color:var(--border)] bg-surface p-6"
+              className="reveal rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-6"
             >
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
                 {m.label}
@@ -534,7 +532,7 @@ function Results() {
           {QUOTES.map((q) => (
             <figure
               key={q.name + q.role}
-              className="reveal rounded-2xl border border-[color:var(--border)] bg-surface p-7 md:p-9"
+              className="reveal rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9"
             >
               <blockquote className="font-display text-lg leading-snug text-foreground md:text-xl">
                 “{q.quote}”
@@ -578,7 +576,10 @@ const FAQS = [
 
 function FAQ() {
   return (
-    <section id="faq" className="border-t border-[color:var(--border)] bg-surface/30 py-24 md:py-32">
+    <section
+      id="faq"
+      className="border-t border-[color:var(--border)] bg-surface/10 backdrop-blur-sm py-24 md:py-32"
+    >
       <div className="mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-12 md:px-8">
         <div className="reveal md:col-span-4">
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
@@ -627,8 +628,8 @@ function FinalCTA() {
           Fix the leaks. <span className="text-[color:var(--primary)]">Fill the calendar.</span>
         </h2>
         <p className="reveal mx-auto mt-5 max-w-xl text-base text-muted md:text-lg">
-          Get a clear read on where your funnel is leaking and exactly what it would take
-          to convert more of your traffic into booked opportunities.
+          Get a clear read on where your funnel is leaking and exactly what it would take to convert
+          more of your traffic into booked opportunities.
         </p>
         <div className="reveal mt-9 flex flex-col items-center gap-3">
           <CTAButton size="lg" />
@@ -649,8 +650,8 @@ function Footer() {
           <div className="md:col-span-5">
             <Logo />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Conversion systems for businesses that want more qualified leads and more
-              booked calls.
+              Conversion systems for businesses that want more qualified leads and more booked
+              calls.
             </p>
           </div>
           <div className="md:col-span-4">
@@ -660,7 +661,10 @@ function Footer() {
             <ul className="mt-4 space-y-2.5">
               {NAV.map((n) => (
                 <li key={n.href}>
-                  <a href={n.href} className="text-sm text-foreground/85 hover:text-[color:var(--primary)]">
+                  <a
+                    href={n.href}
+                    className="text-sm text-foreground/85 hover:text-[color:var(--primary)]"
+                  >
                     {n.label}
                   </a>
                 </li>

@@ -1,11 +1,11 @@
-import { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial } from '@react-three/drei';
-import * as THREE from 'three';
+import { useRef, useMemo } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Points, PointMaterial } from "@react-three/drei";
+import * as THREE from "three";
 
 function ParticleField() {
   const ref = useRef<THREE.Points>(null);
-  
+
   const sphere = useMemo(() => {
     // Generate random points in a sphere
     const positions = new Float32Array(5000 * 3);
@@ -13,7 +13,7 @@ function ParticleField() {
       const theta = Math.random() * 2 * Math.PI;
       const phi = Math.acos(Math.random() * 2 - 1);
       // Radius of 1.5 ensures it covers most of the screen depending on camera
-      const r = Math.cbrt(Math.random()) * 1.5; 
+      const r = Math.cbrt(Math.random()) * 1.5;
 
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
