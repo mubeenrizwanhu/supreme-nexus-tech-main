@@ -65,6 +65,6 @@ Transform the current website into a **futuristic, highly dynamic, and interacti
 
 ### Phase 6: Polish & Performance
 
-- [ ] Test cross-browser compatibility.
-- [ ] Ensure mobile responsiveness (animations should be simplified or scaled down on mobile to prevent lag).
-- [ ] Run Lighthouse performance audit to ensure WebGL and animations aren't hurting SEO or load times.
+- [x] Test cross-browser compatibility.
+- [x] Ensure mobile responsiveness (animations should be simplified or scaled down on mobile to prevent lag).
+- [x] Run Lighthouse performance audit to ensure WebGL and animations aren't hurting SEO or load times.

@@ -23,7 +23,7 @@ export function FadeUpSection({
             staggerChildren: 0.15,
           },
         },
-        hidden: { opacity: 0, y: 40 },
+        hidden: { opacity: 0, y: 20 },
       }}
       className={className}
     >
@@ -43,7 +43,7 @@ export function FadeUpItem({
     <motion.div
       variants={{
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 15 },
       }}
       className={className}
     >
