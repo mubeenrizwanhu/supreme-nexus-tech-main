@@ -59,9 +59,9 @@ Transform the current website into a **futuristic, highly dynamic, and interacti
 
 ### Phase 5: Advanced Lead Gen Components
 
-- [ ] Build the Interactive ROI / Lead Lift Calculator component.
-- [ ] Implement animated stat counters for the "Results" or "Financial Engineering" sections.
-- [ ] Add a subtle, tech-themed loading screen for initial page load.
+- [x] Build the Interactive ROI / Lead Lift Calculator component.
+- [x] Implement animated stat counters for the "Results" or "Financial Engineering" sections.
+- [x] Add a subtle, tech-themed loading screen for initial page load.
 
 ### Phase 6: Polish & Performance
 

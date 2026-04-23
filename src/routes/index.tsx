@@ -12,6 +12,8 @@ import { HeroVisual } from "@/components/site/HeroVisual";
 import { Counter } from "@/components/site/Counter";
 import { MagneticButton } from "@/components/site/MagneticButton";
 import { FadeUpSection, FadeUpItem } from "@/components/site/FadeUpSection";
+import { ROICalculator } from "@/components/site/ROICalculator";
+import { LoadingScreen } from "@/components/site/LoadingScreen";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -729,12 +731,16 @@ function MobileStickyCTA() {
 function Index() {
   return (
     <div className="min-h-screen bg-transparent text-foreground">
+      <LoadingScreen />
       <Header />
       <main>
         <Hero />
         <CredibilityStrip />
         <ProblemOutcome />
         <Services />
+        <section id="roi" className="border-t border-[color:var(--border)] bg-surface/5">
+          <ROICalculator />
+        </section>
         <Process />
         <Results />
         <FAQ />
