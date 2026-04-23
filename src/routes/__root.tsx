@@ -64,6 +64,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { FuturisticBackground } from "../components/site/FuturisticBackground";
+
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <>
+      <FuturisticBackground />
+      <Outlet />
+    </>
+  );
 }

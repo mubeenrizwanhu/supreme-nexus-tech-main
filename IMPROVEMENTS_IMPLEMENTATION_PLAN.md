@@ -33,10 +33,10 @@ Transform the current website into a **futuristic, highly dynamic, and interacti
 - [x] Install `lucide-react` (if not already present) for sleek iconography.
 
 ### Phase 2: The Futuristic Background
-- [ ] Create a `FuturisticBackground.tsx` component.
-- [ ] Implement a live particle/network WebGL animation.
-- [ ] Add the background to the main layout, ensuring it sits behind all other content (`z-index: -1`).
-- [ ] Optimize background animation to pause when out of viewport to save battery/performance.
+- [x] Create a `FuturisticBackground.tsx` component.
+- [x] Implement a live particle/network WebGL animation.
+- [x] Add the background to the main layout, ensuring it sits behind all other content (`z-index: -1`).
+- [x] Optimize background animation to pause when out of viewport to save battery/performance.
 
 ### Phase 3: UI Modernization & Glassmorphism
 - [ ] Update main container styles to utilize `backdrop-blur` and semi-transparent dark backgrounds.

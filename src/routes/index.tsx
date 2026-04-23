@@ -643,7 +643,7 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[color:var(--border)] bg-background py-12">
+    <footer className="border-t border-[color:var(--border)] bg-background/40 backdrop-blur-md py-12">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
@@ -711,7 +711,7 @@ function MobileStickyCTA() {
 function Index() {
   useReveal();
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-transparent text-foreground">
       <Header />
       <main>
         <Hero />
