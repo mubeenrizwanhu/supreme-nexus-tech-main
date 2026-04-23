@@ -53,9 +53,9 @@ Transform the current website into a **futuristic, highly dynamic, and interacti
 
 ### Phase 4: Micro-Interactions & Scroll Animations
 
-- [ ] Wrap key sections (Features, Testimonials, About) in Framer Motion `motion.div` tags for scroll-triggered entry animations (fade up, stagger children).
-- [ ] Implement a custom "Tech" cursor (e.g., a glowing dot with a trailing ring) that reacts to hovering over interactive elements.
-- [ ] Apply a magnetic pull effect to the main "Start Your Review" and "Contact" buttons.
+- [x] Wrap key sections (Features, Testimonials, About) in Framer Motion `motion.div` tags for scroll-triggered entry animations (fade up, stagger children).
+- [ ] ~~Implement a custom "Tech" cursor~~ (Removed per user request).
+- [x] Apply a magnetic pull effect to the main "Start Your Review" and "Contact" buttons.
 
 ### Phase 5: Advanced Lead Gen Components
 

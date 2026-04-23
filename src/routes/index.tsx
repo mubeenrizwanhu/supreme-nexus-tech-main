@@ -8,9 +8,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useReveal } from "@/hooks/use-reveal";
 import { HeroVisual } from "@/components/site/HeroVisual";
 import { Counter } from "@/components/site/Counter";
+import { MagneticButton } from "@/components/site/MagneticButton";
+import { FadeUpSection, FadeUpItem } from "@/components/site/FadeUpSection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -56,16 +57,19 @@ function CTAButton({
       : size === "sm"
         ? "h-9 px-4 text-sm"
         : "h-11 px-5 text-sm";
+  const isFullWidth = className.includes("w-full");
   return (
-    <a
-      href={BOOKING_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`group inline-flex items-center justify-center gap-2 rounded-xl bg-primary font-semibold text-primary-foreground transition-all duration-200 cta-glow hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${sizing} ${className}`}
-    >
-      {children}
-      <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-    </a>
+    <MagneticButton className={isFullWidth ? "w-full" : ""}>
+      <a
+        href={BOOKING_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group inline-flex items-center justify-center gap-2 rounded-xl bg-primary font-semibold text-primary-foreground transition-all duration-200 cta-glow hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${sizing} ${className}`}
+      >
+        {children}
+        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+      </a>
+    </MagneticButton>
   );
 }
 
@@ -181,44 +185,48 @@ function Hero() {
         }}
       />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 md:grid-cols-12 md:px-8">
+      <FadeUpSection className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 md:grid-cols-12 md:px-8">
         <div className="md:col-span-7">
-          <div className="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-elevated/40 px-4 py-2 backdrop-blur-md shadow-[0_0_20px_-5px_color-mix(in_oklab,var(--primary)_20%,transparent)]">
+          <FadeUpItem className="mb-6 inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-elevated/40 px-4 py-2 backdrop-blur-md shadow-[0_0_20px_-5px_color-mix(in_oklab,var(--primary)_20%,transparent)]">
             <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--primary)] animate-pulse-dot" />
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
               Conversion systems · built to book
             </span>
-          </div>
-          <h1 className="reveal font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.02] tracking-tight text-foreground">
-            Turn more traffic into{" "}
-            <span className="relative whitespace-nowrap">
-              <span className="text-[color:var(--primary)]">qualified leads.</span>
-              <span
-                className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full"
-                style={{
-                  background: "linear-gradient(90deg, transparent, var(--primary), transparent)",
-                }}
-              />
-            </span>
-          </h1>
-          <p className="reveal mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-            Supreme Nexus engineers conversion-focused systems that turn your traffic into qualified
-            leads and booked opportunities — through funnel optimization, lead capture, and
-            appointment flow.
-          </p>
+          </FadeUpItem>
+          <FadeUpItem>
+            <h1 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.02] tracking-tight text-foreground">
+              Turn more traffic into{" "}
+              <span className="relative whitespace-nowrap">
+                <span className="text-[color:var(--primary)]">qualified leads.</span>
+                <span
+                  className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full"
+                  style={{
+                    background: "linear-gradient(90deg, transparent, var(--primary), transparent)",
+                  }}
+                />
+              </span>
+            </h1>
+          </FadeUpItem>
+          <FadeUpItem>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+              Supreme Nexus engineers conversion-focused systems that turn your traffic into
+              qualified leads and booked opportunities — through funnel optimization, lead capture,
+              and appointment flow.
+            </p>
+          </FadeUpItem>
 
-          <div className="reveal mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+          <FadeUpItem className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             <CTAButton size="lg" />
             <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
               Conversion strategy · Lead systems · Booked calls
             </span>
-          </div>
+          </FadeUpItem>
         </div>
 
-        <div className="reveal flex justify-center md:col-span-5 md:justify-end">
+        <FadeUpItem className="flex justify-center md:col-span-5 md:justify-end">
           <HeroVisual />
-        </div>
-      </div>
+        </FadeUpItem>
+      </FadeUpSection>
     </section>
   );
 }
@@ -271,9 +279,9 @@ const FIXES = [
 
 function ProblemOutcome() {
   return (
-    <section className="py-24 md:py-32">
+    <FadeUpSection className="py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="reveal mb-14 max-w-2xl">
+        <FadeUpItem className="mb-14 max-w-2xl">
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
             The gap
           </span>
@@ -281,10 +289,10 @@ function ProblemOutcome() {
             Most businesses don't have a traffic problem.
             <span className="text-muted"> They have a conversion problem.</span>
           </h2>
-        </div>
+        </FadeUpItem>
 
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="reveal rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9">
+          <FadeUpItem className="rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9">
             <div className="mb-5 flex items-center gap-2">
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
                 What's leaking
@@ -298,10 +306,10 @@ function ProblemOutcome() {
                 </li>
               ))}
             </ul>
-          </div>
+          </FadeUpItem>
 
-          <div
-            className="reveal rounded-2xl border p-7 md:p-9 backdrop-blur-md"
+          <FadeUpItem
+            className="rounded-2xl border p-7 md:p-9 backdrop-blur-md"
             style={{
               borderColor: "color-mix(in oklab, var(--primary) 30%, transparent)",
               background:
@@ -321,10 +329,10 @@ function ProblemOutcome() {
                 </li>
               ))}
             </ul>
-          </div>
+          </FadeUpItem>
         </div>
       </div>
-    </section>
+    </FadeUpSection>
   );
 }
 
@@ -364,27 +372,29 @@ const SERVICES = [
 function Services() {
   return (
     <section id="services" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="reveal mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-xl">
+      <FadeUpSection className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <FadeUpItem className="max-w-xl">
             <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
               Services
             </span>
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
               Systems that compound into booked calls.
             </h2>
-          </div>
-          <p className="max-w-sm text-sm text-muted md:text-base">
-            Six interlocking levers. Pulled together, they turn marketing spend into qualified
-            pipeline.
-          </p>
+          </FadeUpItem>
+          <FadeUpItem className="max-w-sm">
+            <p className="text-sm text-muted md:text-base">
+              Six interlocking levers. Pulled together, they turn marketing spend into qualified
+              pipeline.
+            </p>
+          </FadeUpItem>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
-            <div
+            <FadeUpItem
               key={s.name}
-              className="reveal group relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--primary)]/60 hover:shadow-[0_0_30px_-5px_color-mix(in_oklab,var(--primary)_40%,transparent)]"
+              className="group relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--primary)]/60 hover:shadow-[0_0_30px_-5px_color-mix(in_oklab,var(--primary)_40%,transparent)]"
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -408,10 +418,10 @@ function Services() {
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted">{s.outcome}</p>
               </div>
-            </div>
+            </FadeUpItem>
           ))}
         </div>
-      </div>
+      </FadeUpSection>
     </section>
   );
 }
@@ -429,15 +439,15 @@ function Process() {
       id="process"
       className="border-y border-[color:var(--border)] bg-surface/10 backdrop-blur-sm py-24 md:py-32"
     >
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="reveal mb-16 max-w-xl">
+      <FadeUpSection className="mx-auto max-w-7xl px-5 md:px-8">
+        <FadeUpItem className="mb-16 max-w-xl">
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
             Process
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Four steps. No guesswork.
           </h2>
-        </div>
+        </FadeUpItem>
 
         <div className="relative">
           {/* connecting line desktop */}
@@ -450,7 +460,7 @@ function Process() {
           />
           <div className="grid gap-10 md:grid-cols-4 md:gap-6">
             {STEPS.map((s) => (
-              <div key={s.n} className="reveal relative">
+              <FadeUpItem key={s.n} className="relative">
                 <div className="relative z-10 mb-5 flex h-[68px] w-[68px] items-center justify-center rounded-2xl border border-[color:var(--border)] bg-elevated/40 backdrop-blur-md shadow-[0_0_20px_-5px_color-mix(in_oklab,var(--primary)_20%,transparent)]">
                   <span className="font-display text-2xl font-bold text-[color:var(--primary)]">
                     {s.n}
@@ -458,11 +468,11 @@ function Process() {
                 </div>
                 <h3 className="font-display text-lg font-bold text-foreground">{s.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{s.d}</p>
-              </div>
+              </FadeUpItem>
             ))}
           </div>
         </div>
-      </div>
+      </FadeUpSection>
     </section>
   );
 }
@@ -492,8 +502,8 @@ const QUOTES = [
 function Results() {
   return (
     <section id="results" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="reveal mb-14 max-w-2xl">
+      <FadeUpSection className="mx-auto max-w-7xl px-5 md:px-8">
+        <FadeUpItem className="mb-14 max-w-2xl">
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
             Results
           </span>
@@ -504,13 +514,13 @@ function Results() {
             Representative ranges from conversion engagements. Numbers vary by offer, traffic
             quality, and current funnel maturity.
           </p>
-        </div>
+        </FadeUpItem>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {METRICS.map((m) => (
-            <div
+            <FadeUpItem
               key={m.label}
-              className="reveal rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-6"
+              className="rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-6"
             >
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
                 {m.label}
@@ -524,15 +534,15 @@ function Results() {
                 <span className="h-1 w-1 rounded-full bg-[color:var(--success)]" />
                 {m.note}
               </span>
-            </div>
+            </FadeUpItem>
           ))}
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {QUOTES.map((q) => (
-            <figure
+            <FadeUpItem
               key={q.name + q.role}
-              className="reveal rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9"
+              className="rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9"
             >
               <blockquote className="font-display text-lg leading-snug text-foreground md:text-xl">
                 “{q.quote}”
@@ -543,10 +553,10 @@ function Results() {
                   {q.name} · {q.role}
                 </span>
               </figcaption>
-            </figure>
+            </FadeUpItem>
           ))}
         </div>
-      </div>
+      </FadeUpSection>
     </section>
   );
 }
@@ -580,16 +590,16 @@ function FAQ() {
       id="faq"
       className="border-t border-[color:var(--border)] bg-surface/10 backdrop-blur-sm py-24 md:py-32"
     >
-      <div className="mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-12 md:px-8">
-        <div className="reveal md:col-span-4">
+      <FadeUpSection className="mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-12 md:px-8">
+        <FadeUpItem className="md:col-span-4">
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
             FAQ
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Answers before the call.
           </h2>
-        </div>
-        <div className="reveal md:col-span-8">
+        </FadeUpItem>
+        <FadeUpItem className="md:col-span-8">
           <Accordion type="single" collapsible className="w-full">
             {FAQS.map((f, i) => (
               <AccordionItem
@@ -606,8 +616,8 @@ function FAQ() {
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
-      </div>
+        </FadeUpItem>
+      </FadeUpSection>
     </section>
   );
 }
@@ -623,21 +633,25 @@ function FinalCTA() {
             "radial-gradient(closest-side, color-mix(in oklab, var(--primary) 22%, transparent), transparent)",
         }}
       />
-      <div className="relative mx-auto max-w-3xl px-5 text-center md:px-8">
-        <h2 className="reveal font-display text-4xl font-bold leading-[1.05] tracking-tight text-foreground md:text-6xl">
-          Fix the leaks. <span className="text-[color:var(--primary)]">Fill the calendar.</span>
-        </h2>
-        <p className="reveal mx-auto mt-5 max-w-xl text-base text-muted md:text-lg">
-          Get a clear read on where your funnel is leaking and exactly what it would take to convert
-          more of your traffic into booked opportunities.
-        </p>
-        <div className="reveal mt-9 flex flex-col items-center gap-3">
+      <FadeUpSection className="relative mx-auto max-w-3xl px-5 text-center md:px-8">
+        <FadeUpItem>
+          <h2 className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-foreground md:text-6xl">
+            Fix the leaks. <span className="text-[color:var(--primary)]">Fill the calendar.</span>
+          </h2>
+        </FadeUpItem>
+        <FadeUpItem>
+          <p className="mx-auto mt-5 max-w-xl text-base text-muted md:text-lg">
+            Get a clear read on where your funnel is leaking and exactly what it would take to
+            convert more of your traffic into booked opportunities.
+          </p>
+        </FadeUpItem>
+        <FadeUpItem className="mt-9 flex flex-col items-center gap-3">
           <CTAButton size="lg" />
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
             For businesses ready to improve lead flow and conversion performance
           </span>
-        </div>
-      </div>
+        </FadeUpItem>
+      </FadeUpSection>
     </section>
   );
 }
@@ -713,7 +727,6 @@ function MobileStickyCTA() {
 }
 
 function Index() {
-  useReveal();
   return (
     <div className="min-h-screen bg-transparent text-foreground">
       <Header />
