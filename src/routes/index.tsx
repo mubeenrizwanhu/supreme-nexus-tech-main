@@ -665,6 +665,31 @@ function FinalCTA() {
 }
 
 function BookingForm() {
+  const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [phone, setPhone] = useState("");
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value.replace(/\D/g, "");
+    if (input.length > 10) return;
+    
+    let formatted = input;
+    if (input.length > 0) {
+      if (input.length <= 3) {
+        formatted = `(${input}`;
+      } else if (input.length <= 6) {
+        formatted = `(${input.slice(0, 3)}) ${input.slice(3)}`;
+      } else {
+        formatted = `(${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6, 10)}`;
+      }
+    }
+    setPhone(formatted);
+  };
+
+  const getLabelGlow = (id: string) => 
+    focusedField === id 
+      ? "text-[color:var(--primary)] drop-shadow-[0_0_10px_color-mix(in_oklab,var(--primary)_80%,transparent)] scale-[1.02]" 
+      : "text-muted opacity-80";
+
   return (
     <section id="book" className="py-24 md:py-32 relative overflow-hidden border-t border-[color:var(--border)]">
       <div className="pointer-events-none absolute inset-0 grid-bg radial-fade opacity-20" />
@@ -696,41 +721,94 @@ function BookingForm() {
           
           <form className="grid gap-x-8 gap-y-7 md:grid-cols-2" onSubmit={(e) => e.preventDefault()}>
             <div className="space-y-2.5">
-              <Label htmlFor="name" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Full Name</Label>
+              <Label 
+                htmlFor="name" 
+                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("name")}`}
+              >
+                Full Name
+              </Label>
               <Input 
                 id="name" 
                 placeholder="John Doe" 
+                onFocus={() => setFocusedField("name")}
+                onBlur={() => setFocusedField(null)}
                 className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
               />
             </div>
             <div className="space-y-2.5">
-              <Label htmlFor="email" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Work Email</Label>
+              <Label 
+                htmlFor="email" 
+                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("email")}`}
+              >
+                Work Email
+              </Label>
               <Input 
                 id="email" 
                 type="email" 
                 placeholder="john@company.com" 
+                onFocus={() => setFocusedField("email")}
+                onBlur={() => setFocusedField(null)}
                 className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
               />
             </div>
             <div className="space-y-2.5">
-              <Label htmlFor="company" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Company Name</Label>
+              <Label 
+                htmlFor="phone" 
+                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("phone")}`}
+              >
+                Phone Number
+              </Label>
+              <Input 
+                id="phone" 
+                type="tel"
+                placeholder="(111) 222-3333" 
+                value={phone}
+                onChange={handlePhoneChange}
+                onFocus={() => setFocusedField("phone")}
+                onBlur={() => setFocusedField(null)}
+                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5 font-mono" 
+              />
+            </div>
+            <div className="space-y-2.5">
+              <Label 
+                htmlFor="company" 
+                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("company")}`}
+              >
+                Company Name
+              </Label>
               <Input 
                 id="company" 
                 placeholder="Acme Inc." 
-                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
-              />
-            </div>
-            <div className="space-y-2.5">
-              <Label htmlFor="website" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Website URL</Label>
-              <Input 
-                id="website" 
-                placeholder="https://example.com" 
+                onFocus={() => setFocusedField("company")}
+                onBlur={() => setFocusedField(null)}
                 className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
               />
             </div>
             <div className="space-y-2.5 md:col-span-2">
-              <Label htmlFor="revenue" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Current Monthly Revenue</Label>
-              <Select>
+              <Label 
+                htmlFor="website" 
+                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("website")}`}
+              >
+                Website URL
+              </Label>
+              <Input 
+                id="website" 
+                placeholder="https://example.com" 
+                onFocus={() => setFocusedField("website")}
+                onBlur={() => setFocusedField(null)}
+                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
+              />
+            </div>
+            <div className="space-y-2.5 md:col-span-2">
+              <Label 
+                htmlFor="revenue" 
+                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("revenue")}`}
+              >
+                Current Monthly Revenue
+              </Label>
+              <Select 
+                onOpenChange={(open) => setFocusedField(open ? "revenue" : null)}
+              >
                 <SelectTrigger className="bg-background/40 border-none ring-1 ring-white/5 h-13 rounded-xl px-5 focus:ring-[color:var(--primary)] focus:bg-background/60 transition-all">
                   <SelectValue placeholder="Select revenue range" />
                 </SelectTrigger>
@@ -743,10 +821,17 @@ function BookingForm() {
               </Select>
             </div>
             <div className="space-y-2.5 md:col-span-2">
-              <Label htmlFor="message" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Biggest conversion bottleneck?</Label>
+              <Label 
+                htmlFor="message" 
+                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("message")}`}
+              >
+                Biggest conversion bottleneck?
+              </Label>
               <Textarea 
                 id="message" 
                 placeholder="Tell us about your current challenges..." 
+                onFocus={() => setFocusedField("message")}
+                onBlur={() => setFocusedField(null)}
                 className="bg-background/40 border-none ring-1 ring-white/5 min-h-[120px] rounded-xl px-5 py-4 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all resize-none" 
               />
             </div>
