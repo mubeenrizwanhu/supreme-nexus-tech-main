@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Check, Minus, Menu, X } from "lucide-react";
+import { 
+  ArrowRight, 
+  Check, 
+  Minus, 
+  Menu, 
+  X, 
+  Clock, 
+  Calendar as CalendarIcon, 
+  Loader2, 
+  ChevronLeft, 
+  ChevronRight 
+} from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -24,7 +35,11 @@ import { MagneticButton } from "@/components/site/MagneticButton";
 import { FadeUpSection, FadeUpItem } from "@/components/site/FadeUpSection";
 import { ROICalculator } from "@/components/site/ROICalculator";
 import { LoadingScreen } from "@/components/site/LoadingScreen";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { format, addMonths, startOfMonth, endOfMonth, isBefore, startOfToday, eachDayOfInterval, startOfWeek, endOfWeek, isSameMonth, addDays } from "date-fns";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -664,8 +679,231 @@ function FinalCTA() {
   );
 }
 
+function ProfessionalCalendar({ 
+  selectedDate, 
+  onSelect, 
+  minDate, 
+  maxDate 
+}: { 
+  selectedDate?: Date, 
+  onSelect: (date: Date) => void,
+  minDate: Date,
+  maxDate: Date
+}) {
+  const [currentMonth, setCurrentMonth] = useState(startOfMonth(selectedDate || new Date()));
+  const monthStart = startOfMonth(currentMonth);
+  const calendarStart = startOfWeek(monthStart);
+  
+  // Always generate exactly 42 days (6 full weeks) starting from the beginning of the first week
+  const totalDays = Array.from({ length: 42 }).map((_, i) => addDays(calendarStart, i));
+
+  const nextMonth = () => {
+    const next = addMonths(currentMonth, 1);
+    if (next <= maxDate) setCurrentMonth(next);
+  };
+
+  const prevMonth = () => {
+    const prev = addMonths(currentMonth, -1);
+    if (prev >= startOfMonth(minDate)) setCurrentMonth(prev);
+  };
+
+  return (
+    <div className="w-[300px] select-none">
+      <div className="flex items-center justify-between mb-6 px-1">
+        <h4 className="font-display text-sm font-bold text-white">
+          {format(currentMonth, "MMMM yyyy")}
+        </h4>
+        <div className="flex gap-2">
+          <button 
+            type="button"
+            onClick={prevMonth} 
+            disabled={currentMonth <= startOfToday()}
+            className="p-1.5 rounded-lg border border-white/5 hover:bg-white/5 disabled:opacity-30 transition-all text-white/50 hover:text-white"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button 
+            type="button"
+            onClick={nextMonth} 
+            disabled={currentMonth >= startOfMonth(maxDate)}
+            className="p-1.5 rounded-lg border border-white/5 hover:bg-white/5 disabled:opacity-30 transition-all text-white/50 hover:text-white"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+      
+      <div className="grid grid-cols-7 gap-1 mb-2 text-center">
+        {["S", "M", "T", "W", "T", "F", "S"].map(d => (
+          <span key={d} className="text-[10px] font-mono font-bold text-white/30 py-2">{d}</span>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-7 gap-1">
+        {totalDays.map((day, i) => {
+          const isSelected = selectedDate && format(day, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd");
+          const isToday = format(day, "yyyy-MM-dd") === format(new Date(), "yyyy-MM-dd");
+          const isCurrentMonth = isSameMonth(day, currentMonth);
+          const isDisabled = day < startOfToday() || day > maxDate;
+
+          return (
+            <motion.button
+              key={day.toString()}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.005 }}
+              onClick={() => !isDisabled && onSelect(day)}
+              disabled={isDisabled}
+              className={cn(
+                "h-9 w-9 rounded-xl flex items-center justify-center text-xs transition-all relative group overflow-hidden",
+                isSelected 
+                  ? "bg-[color:var(--primary)] text-primary-foreground font-bold shadow-[0_0_20px_-5px_#10D6C5]" 
+                  : cn(
+                      "hover:bg-white/5 text-white hover:text-white hover:shadow-[0_0_20px_-5px_#10D6C5] border border-transparent hover:border-[color:var(--primary)]/30",
+                      !isCurrentMonth && "text-muted-foreground/20 hover:text-muted-foreground/40"
+                    ),
+                isDisabled && "text-muted-foreground/30 cursor-not-allowed bg-transparent grayscale",
+                isToday && !isSelected && "border border-[color:var(--primary)]/30 text-[color:var(--primary)]"
+              )}
+            >
+              {isSelected && (
+                <motion.div 
+                  layoutId="activeDay"
+                  className="absolute inset-0 rounded-xl border-2 border-[color:var(--primary)] ring-4 ring-[color:var(--primary)]/20"
+                />
+              )}
+              <span className="relative z-10">{format(day, "d")}</span>
+              {!isDisabled && !isSelected && (
+                <div className="absolute inset-0 rounded-xl bg-[color:var(--primary)]/0 group-hover:bg-[color:var(--primary)]/5 transition-colors" />
+              )}
+            </motion.button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function BookingDateTimePicker({ 
+  date, 
+  time, 
+  onDateChange, 
+  onTimeChange 
+}: { 
+  date?: Date, 
+  time?: string, 
+  onDateChange: (date: Date | undefined) => void, 
+  onTimeChange: (time: string) => void 
+}) {
+  const [open, setOpen] = useState(false);
+  
+  const today = new Date();
+  const startMonth = startOfMonth(today);
+  const endMonth = endOfMonth(addMonths(today, 3));
+
+  const times = [
+    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+    "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM",
+    "04:00 PM", "04:30 PM", "05:00 PM"
+  ];
+
+  return (
+    <div className="space-y-2.5">
+      <Label className="text-sm font-medium text-muted ml-1">Preferred Date & Time</Label>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            className={cn(
+              "flex w-full items-center gap-3 rounded-xl border border-[color:var(--border)] bg-elevated/20 px-4 py-3.5 text-left transition-all hover:border-[color:var(--primary)]/50 focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]/20 group",
+              !date && "text-muted-foreground",
+              date && "border-[color:var(--primary)]/30 bg-[color:var(--primary)]/5"
+            )}
+          >
+            <div className={cn(
+              "flex h-8 w-8 items-center justify-center rounded-lg bg-surface border border-[color:var(--border)] transition-colors group-hover:border-[color:var(--primary)]/30",
+              date && "bg-[color:var(--primary)]/10 border-[color:var(--primary)]/20"
+            )}>
+              <CalendarIcon className={cn("h-4 w-4 text-muted transition-colors", date && "text-[color:var(--primary)]")} />
+            </div>
+            <div className="flex-1">
+              <div className="text-[13px] font-semibold text-foreground">
+                {date ? format(date, "PPP") : "Select Date"}
+              </div>
+              <div className="text-[11px] text-muted font-mono uppercase tracking-wider">
+                {time ? `Preferred time: ${time}` : "Choose your slot"}
+              </div>
+            </div>
+            <Clock className="h-4 w-4 text-muted/50" />
+          </button>
+        </PopoverTrigger>
+        <PopoverContent 
+          className="w-auto p-0 border-[color:var(--border)] bg-surface/95 backdrop-blur-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden" 
+          align="center"
+          sideOffset={8}
+        >
+          <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-[color:var(--border)] items-stretch">
+            <div className="p-6 bg-surface/50">
+              <ProfessionalCalendar
+                selectedDate={date}
+                onSelect={(d) => {
+                  onDateChange(d);
+                }}
+                minDate={startOfToday()}
+                maxDate={endMonth}
+              />
+            </div>
+            <div className="flex flex-col w-full md:w-52 bg-surface/30">
+              <div className="p-4 border-b border-[color:var(--border)] bg-elevated/30">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-[color:var(--primary)]">Available Slots</span>
+                  <Clock className="h-3 w-3 text-[color:var(--primary)]/50" />
+                </div>
+              </div>
+              <div className="relative flex-1">
+                <ScrollArea className="h-full max-h-[340px]">
+                  <div className="p-3 grid grid-cols-2 md:grid-cols-1 gap-2">
+                    {times.map((t, i) => (
+                      <motion.button
+                        key={t}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.03, duration: 0.2 }}
+                        type="button"
+                        onClick={() => {
+                          onTimeChange(t);
+                          if (date) setOpen(false);
+                        }}
+                        className={cn(
+                          "group relative rounded-xl px-4 py-3 text-left text-sm transition-all duration-300 overflow-hidden",
+                          time === t 
+                            ? "bg-[color:var(--primary)] text-primary-foreground font-bold shadow-[0_8px_20px_-6px_color-mix(in_oklab,var(--primary)_60%,transparent)]" 
+                            : "hover:bg-[color:var(--primary)]/10 text-muted hover:text-foreground border border-white/5 hover:border-[color:var(--primary)]/30 hover:shadow-[0_0_20px_-5px_#10D6C5]"
+                        )}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span>{t}</span>
+                          {time === t && <Check className="h-3 w-3" />}
+                        </div>
+                      </motion.button>
+                    ))}
+                  </div>
+                </ScrollArea>
+                {/* Scroll indicators */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-surface/90 to-transparent z-10" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-4 bg-gradient-to-b from-surface/40 to-transparent z-10" />
+              </div>
+            </div>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+}
+
 function BookingForm() {
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -675,6 +913,8 @@ function BookingForm() {
     phone: "",
     company: "",
     website: "",
+    date: undefined as Date | undefined,
+    time: "",
     revenue: "",
     message: ""
   });
@@ -707,6 +947,16 @@ function BookingForm() {
     if (error) setError(null);
   };
 
+  const handleDateChange = (date: Date | undefined) => {
+    setFormData(prev => ({ ...prev, date }));
+    if (error) setError(null);
+  };
+
+  const handleTimeChange = (time: string) => {
+    setFormData(prev => ({ ...prev, time }));
+    if (error) setError(null);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -714,7 +964,7 @@ function BookingForm() {
     const isPhoneValid = formData.phone.replace(/\D/g, "").length === 10;
     const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
     
-    if (!formData.name || !formData.email || !formData.phone || !formData.company || !formData.website || !formData.revenue || !formData.message) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.company || !formData.website || !formData.revenue || !formData.message || !formData.date || !formData.time) {
       setError("Please fill out all fields to continue.");
       return;
     }
@@ -728,10 +978,15 @@ function BookingForm() {
       setError("Please enter a complete 10-digit phone number.");
       return;
     }
-
-    // Success state
-    setIsSubmitted(true);
+    
+    setIsLoading(true);
     setError(null);
+
+    // Simulate real live processing
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsSubmitted(true);
+    }, 2000);
   };
 
   const getLabelGlow = (id: string) =>
@@ -768,12 +1023,29 @@ function BookingForm() {
         <FadeUpItem className="rounded-[2.5rem] border border-[color:var(--border)] bg-surface/30 backdrop-blur-2xl p-8 md:p-14 shadow-[0_30px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden group transition-all duration-500 hover:border-[color:var(--primary)]/20">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[color:var(--primary)]/40 to-transparent" />
 
-          {isSubmitted ? (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="py-12 text-center"
-            >
+          <AnimatePresence mode="wait">
+            {isLoading ? (
+              <motion.div
+                key="loading"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="py-24 text-center flex flex-col items-center justify-center"
+              >
+                <div className="relative mb-8">
+                  <div className="absolute inset-0 rounded-full bg-[color:var(--primary)]/20 blur-xl animate-pulse" />
+                  <Loader2 className="h-16 w-16 text-[color:var(--primary)] animate-spin relative z-10" />
+                </div>
+                <h3 className="font-display text-2xl font-bold text-foreground">Analyzing Your Request...</h3>
+                <p className="mt-2 text-sm text-muted font-mono uppercase tracking-widest">Encrypting strategy profile · Live</p>
+              </motion.div>
+            ) : isSubmitted ? (
+              <motion.div 
+                key="success"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="py-12 text-center"
+              >
               <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-[color:var(--primary)]/10 ring-1 ring-[color:var(--primary)]/30">
                 <Check className="h-10 w-10 text-[color:var(--primary)]" />
               </div>
@@ -790,6 +1062,8 @@ function BookingForm() {
                     phone: "",
                     company: "",
                     website: "",
+                    date: undefined,
+                    time: "",
                     revenue: "",
                     message: ""
                   });
@@ -800,7 +1074,13 @@ function BookingForm() {
               </button>
             </motion.div>
           ) : (
-            <form className="grid gap-x-8 gap-y-7 md:grid-cols-2" onSubmit={handleSubmit}>
+            <motion.form 
+              key="form"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="grid gap-x-8 gap-y-7 md:grid-cols-2" 
+              onSubmit={handleSubmit}
+            >
               <div className="space-y-2.5">
                 <Label
                   htmlFor="name"
@@ -888,6 +1168,16 @@ function BookingForm() {
                   className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5"
                 />
               </div>
+              
+              <div className="md:col-span-2">
+                <BookingDateTimePicker 
+                  date={formData.date}
+                  time={formData.time}
+                  onDateChange={handleDateChange}
+                  onTimeChange={handleTimeChange}
+                />
+              </div>
+
               <div className="space-y-2.5 md:col-span-2">
                 <Label
                   htmlFor="revenue"
@@ -965,8 +1255,9 @@ function BookingForm() {
                   </div>
                 </div>
               </div>
-            </form>
+            </motion.form>
           )}
+          </AnimatePresence>
         </FadeUpItem>
       </FadeUpSection>
     </section>
