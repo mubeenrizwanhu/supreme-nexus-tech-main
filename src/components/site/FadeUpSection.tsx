@@ -4,9 +4,11 @@ import { ReactNode } from "react";
 export function FadeUpSection({
   children,
   className = "",
+  style = {},
 }: {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <motion.div
@@ -26,6 +28,7 @@ export function FadeUpSection({
         hidden: { opacity: 0, y: 20 },
       }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>
@@ -35,9 +38,11 @@ export function FadeUpSection({
 export function FadeUpItem({
   children,
   className = "",
+  style = {},
 }: {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <motion.div
@@ -46,6 +51,7 @@ export function FadeUpItem({
         hidden: { opacity: 0, y: 15 },
       }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>
