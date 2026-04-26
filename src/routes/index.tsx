@@ -118,11 +118,10 @@ function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled
           ? "border-b border-[color:var(--border)] bg-background/70 backdrop-blur-xl"
           : "border-b border-transparent"
-      }`}
+        }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
         <Logo />
@@ -666,7 +665,18 @@ function FinalCTA() {
 
 function BookingForm() {
   const [focusedField, setFocusedField] = useState<string | null>(null);
-  const [phone, setPhone] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    website: "",
+    revenue: "",
+    message: ""
+  });
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.replace(/\D/g, "");
@@ -682,12 +692,50 @@ function BookingForm() {
         formatted = `(${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6, 10)}`;
       }
     }
-    setPhone(formatted);
+    setFormData(prev => ({ ...prev, phone: formatted }));
   };
 
-  const getLabelGlow = (id: string) => 
-    focusedField === id 
-      ? "text-[color:var(--primary)] drop-shadow-[0_0_10px_color-mix(in_oklab,var(--primary)_80%,transparent)] scale-[1.02]" 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+    if (error) setError(null);
+  };
+
+  const handleRevenueChange = (value: string) => {
+    setFormData(prev => ({ ...prev, revenue: value }));
+    if (error) setError(null);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Comprehensive validation
+    const isPhoneValid = formData.phone.replace(/\D/g, "").length === 10;
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+    
+    if (!formData.name || !formData.email || !formData.phone || !formData.company || !formData.website || !formData.revenue || !formData.message) {
+      setError("Please fill out all fields to continue.");
+      return;
+    }
+
+    if (!isEmailValid) {
+      setError("Please enter a valid work email.");
+      return;
+    }
+
+    if (!isPhoneValid) {
+      setError("Please enter a complete 10-digit phone number.");
+      return;
+    }
+
+    // Success state
+    setIsSubmitted(true);
+    setError(null);
+  };
+
+  const getLabelGlow = (id: string) =>
+    focusedField === id
+      ? "text-[color:var(--primary)] drop-shadow-[0_0_10px_color-mix(in_oklab,var(--primary)_80%,transparent)] scale-[1.02]"
       : "text-muted opacity-80";
 
   return (
@@ -700,7 +748,7 @@ function BookingForm() {
             "radial-gradient(closest-side, color-mix(in oklab, var(--primary) 15%, transparent), transparent)",
         }}
       />
-      
+
       <FadeUpSection className="mx-auto max-w-4xl px-5 md:px-8 relative z-10">
         <div className="text-center mb-16">
           <FadeUpItem>
@@ -718,150 +766,207 @@ function BookingForm() {
 
         <FadeUpItem className="rounded-[2.5rem] border border-[color:var(--border)] bg-surface/30 backdrop-blur-2xl p-8 md:p-14 shadow-[0_30px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden group transition-all duration-500 hover:border-[color:var(--primary)]/20">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[color:var(--primary)]/40 to-transparent" />
-          
-          <form className="grid gap-x-8 gap-y-7 md:grid-cols-2" onSubmit={(e) => e.preventDefault()}>
-            <div className="space-y-2.5">
-              <Label 
-                htmlFor="name" 
-                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("name")}`}
-              >
-                Full Name
-              </Label>
-              <Input 
-                id="name" 
-                placeholder="John Doe" 
-                onFocus={() => setFocusedField("name")}
-                onBlur={() => setFocusedField(null)}
-                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
-              />
-            </div>
-            <div className="space-y-2.5">
-              <Label 
-                htmlFor="email" 
-                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("email")}`}
-              >
-                Work Email
-              </Label>
-              <Input 
-                id="email" 
-                type="email" 
-                placeholder="john@company.com" 
-                onFocus={() => setFocusedField("email")}
-                onBlur={() => setFocusedField(null)}
-                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
-              />
-            </div>
-            <div className="space-y-2.5">
-              <Label 
-                htmlFor="phone" 
-                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("phone")}`}
-              >
-                Phone Number
-              </Label>
-              <Input 
-                id="phone" 
-                type="tel"
-                placeholder="(111) 222-3333" 
-                value={phone}
-                onChange={handlePhoneChange}
-                onFocus={() => setFocusedField("phone")}
-                onBlur={() => setFocusedField(null)}
-                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5 font-mono" 
-              />
-            </div>
-            <div className="space-y-2.5">
-              <Label 
-                htmlFor="company" 
-                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("company")}`}
-              >
-                Company Name
-              </Label>
-              <Input 
-                id="company" 
-                placeholder="Acme Inc." 
-                onFocus={() => setFocusedField("company")}
-                onBlur={() => setFocusedField(null)}
-                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
-              />
-            </div>
-            <div className="space-y-2.5 md:col-span-2">
-              <Label 
-                htmlFor="website" 
-                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("website")}`}
-              >
-                Website URL
-              </Label>
-              <Input 
-                id="website" 
-                placeholder="https://example.com" 
-                onFocus={() => setFocusedField("website")}
-                onBlur={() => setFocusedField(null)}
-                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
-              />
-            </div>
-            <div className="space-y-2.5 md:col-span-2">
-              <Label 
-                htmlFor="revenue" 
-                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("revenue")}`}
-              >
-                Current Monthly Revenue
-              </Label>
-              <Select 
-                onOpenChange={(open) => setFocusedField(open ? "revenue" : null)}
-              >
-                <SelectTrigger className="bg-background/40 border-none ring-1 ring-white/5 h-13 rounded-xl px-5 focus:ring-[color:var(--primary)] focus:bg-background/60 transition-all">
-                  <SelectValue placeholder="Select revenue range" />
-                </SelectTrigger>
-                <SelectContent className="bg-elevated/95 backdrop-blur-xl border-white/10 rounded-xl">
-                  <SelectItem value="under-10k">Under $10k/mo</SelectItem>
-                  <SelectItem value="10k-50k">$10k - $50k/mo</SelectItem>
-                  <SelectItem value="50k-100k">$50k - $100k/mo</SelectItem>
-                  <SelectItem value="100k-plus">$100k+/mo</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2.5 md:col-span-2">
-              <Label 
-                htmlFor="message" 
-                className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("message")}`}
-              >
-                Biggest conversion bottleneck?
-              </Label>
-              <Textarea 
-                id="message" 
-                placeholder="Tell us about your current challenges..." 
-                onFocus={() => setFocusedField("message")}
-                onBlur={() => setFocusedField(null)}
-                className="bg-background/40 border-none ring-1 ring-white/5 min-h-[120px] rounded-xl px-5 py-4 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all resize-none" 
-              />
-            </div>
-            <div className="md:col-span-2 pt-6">
+
+          {isSubmitted ? (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="py-12 text-center"
+            >
+              <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-[color:var(--primary)]/10 ring-1 ring-[color:var(--primary)]/30">
+                <Check className="h-10 w-10 text-[color:var(--primary)]" />
+              </div>
+              <h3 className="font-display text-3xl font-bold text-foreground">Request Received!</h3>
+              <p className="mt-4 text-lg text-muted max-w-sm mx-auto leading-relaxed">
+                Thank you for reaching out. Your request has been submitted and we will contact you shortly to schedule your audit!
+              </p>
               <button 
-                type="submit"
-                className="group relative w-full h-15 rounded-xl bg-primary font-display text-xl font-bold text-primary-foreground transition-all duration-300 hover:shadow-[0_0_50px_-5px_color-mix(in_oklab,var(--primary)_60%,transparent)] hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    company: "",
+                    website: "",
+                    revenue: "",
+                    message: ""
+                  });
+                }}
+                className="mt-10 font-mono text-[10px] uppercase tracking-[0.2em] text-muted hover:text-[color:var(--primary)] transition-colors"
               >
-                <span className="relative z-10 flex items-center justify-center gap-3">
-                  Claim Your Strategy Call
-                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-                <div className="absolute inset-0 bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
+                ← Back to form
               </button>
-              <div className="flex items-center justify-center gap-6 mt-6">
-                <div className="flex items-center gap-2">
-                  <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
-                  <span className="text-[10px] font-mono text-muted uppercase tracking-widest">No Pitch</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
-                  <span className="text-[10px] font-mono text-muted uppercase tracking-widest">Pure Value</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
-                  <span className="text-[10px] font-mono text-muted uppercase tracking-widest">1:1 Audit</span>
+            </motion.div>
+          ) : (
+            <form className="grid gap-x-8 gap-y-7 md:grid-cols-2" onSubmit={handleSubmit}>
+              <div className="space-y-2.5">
+                <Label
+                  htmlFor="name"
+                  className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("name")}`}
+                >
+                  Full Name
+                </Label>
+                <Input
+                  id="name"
+                  placeholder="John Doe"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  onFocus={() => setFocusedField("name")}
+                  onBlur={() => setFocusedField(null)}
+                  className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5"
+                />
+              </div>
+              <div className="space-y-2.5">
+                <Label
+                  htmlFor="email"
+                  className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("email")}`}
+                >
+                  Work Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="john@company.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  onFocus={() => setFocusedField("email")}
+                  onBlur={() => setFocusedField(null)}
+                  className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5"
+                />
+              </div>
+              <div className="space-y-2.5">
+                <Label
+                  htmlFor="phone"
+                  className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("phone")}`}
+                >
+                  Phone Number
+                </Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="(111) 222-3333"
+                  value={formData.phone}
+                  onChange={handlePhoneChange}
+                  onFocus={() => setFocusedField("phone")}
+                  onBlur={() => setFocusedField(null)}
+                  className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5 font-mono"
+                />
+              </div>
+              <div className="space-y-2.5">
+                <Label
+                  htmlFor="company"
+                  className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("company")}`}
+                >
+                  Company Name
+                </Label>
+                <Input
+                  id="company"
+                  placeholder="Acme Inc."
+                  value={formData.company}
+                  onChange={handleInputChange}
+                  onFocus={() => setFocusedField("company")}
+                  onBlur={() => setFocusedField(null)}
+                  className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5"
+                />
+              </div>
+              <div className="space-y-2.5 md:col-span-2">
+                <Label
+                  htmlFor="website"
+                  className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("website")}`}
+                >
+                  Website URL
+                </Label>
+                <Input
+                  id="website"
+                  placeholder="https://example.com"
+                  value={formData.website}
+                  onChange={handleInputChange}
+                  onFocus={() => setFocusedField("website")}
+                  onBlur={() => setFocusedField(null)}
+                  className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5"
+                />
+              </div>
+              <div className="space-y-2.5 md:col-span-2">
+                <Label
+                  htmlFor="revenue"
+                  className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("revenue")}`}
+                >
+                  Current Monthly Revenue
+                </Label>
+                <Select
+                  value={formData.revenue}
+                  onValueChange={handleRevenueChange}
+                  onOpenChange={(open) => setFocusedField(open ? "revenue" : null)}
+                >
+                  <SelectTrigger className="bg-background/40 border-none ring-1 ring-white/5 h-13 rounded-xl px-5 focus:ring-[color:var(--primary)] focus:bg-background/60 transition-all">
+                    <SelectValue placeholder="Select revenue range" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-elevated/95 backdrop-blur-xl border-white/10 rounded-xl">
+                    <SelectItem value="under-10k">Under $10k/mo</SelectItem>
+                    <SelectItem value="10k-50k">$10k - $50k/mo</SelectItem>
+                    <SelectItem value="50k-100k">$50k - $100k/mo</SelectItem>
+                    <SelectItem value="100k-plus">$100k+/mo</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2.5 md:col-span-2">
+                <Label
+                  htmlFor="message"
+                  className={`text-[10px] font-mono uppercase tracking-[0.2em] ml-1 transition-all duration-300 block ${getLabelGlow("message")}`}
+                >
+                  Biggest conversion bottleneck?
+                </Label>
+                <Textarea
+                  id="message"
+                  placeholder="Tell us about your current challenges..."
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  onFocus={() => setFocusedField("message")}
+                  onBlur={() => setFocusedField(null)}
+                  className="bg-background/40 border-none ring-1 ring-white/5 min-h-[120px] rounded-xl px-5 py-4 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all resize-none"
+                />
+              </div>
+
+              {error && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="md:col-span-2 rounded-lg bg-destructive/10 border border-destructive/20 p-3 text-center"
+                >
+                  <p className="text-xs font-mono text-destructive uppercase tracking-widest">{error}</p>
+                </motion.div>
+              )}
+
+              <div className="md:col-span-2 pt-6">
+                <button
+                  type="submit"
+                  className="group relative w-full h-15 rounded-xl bg-primary font-display text-xl font-bold text-primary-foreground transition-all duration-300 hover:shadow-[0_0_50px_-5px_color-mix(in_oklab,var(--primary)_60%,transparent)] hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-3">
+                    Claim Your Strategy Call
+                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                  <div className="absolute inset-0 bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
+                </button>
+                <div className="flex items-center justify-center gap-6 mt-6">
+                  <div className="flex items-center gap-2">
+                    <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
+                    <span className="text-[10px] font-mono text-muted uppercase tracking-widest">No Pitch</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
+                    <span className="text-[10px] font-mono text-muted uppercase tracking-widest">Pure Value</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
+                    <span className="text-[10px] font-mono text-muted uppercase tracking-widest">1:1 Audit</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          )}
+        </FadeUpItem>
         </FadeUpItem>
       </FadeUpSection>
     </section>
@@ -929,9 +1034,8 @@ function MobileStickyCTA() {
   }, []);
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 border-t border-[color:var(--border)] bg-background/85 p-3 backdrop-blur-xl transition-transform duration-300 md:hidden ${
-        show ? "translate-y-0" : "translate-y-full"
-      }`}
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-[color:var(--border)] bg-background/85 p-3 backdrop-blur-xl transition-transform duration-300 md:hidden ${show ? "translate-y-0" : "translate-y-full"
+        }`}
     >
       <CTAButton className="w-full" size="lg" />
     </div>
