@@ -24,6 +24,7 @@ import { MagneticButton } from "@/components/site/MagneticButton";
 import { FadeUpSection, FadeUpItem } from "@/components/site/FadeUpSection";
 import { ROICalculator } from "@/components/site/ROICalculator";
 import { LoadingScreen } from "@/components/site/LoadingScreen";
+import { motion } from "framer-motion";
 
 export const Route = createFileRoute("/")({
   head: () => ({
