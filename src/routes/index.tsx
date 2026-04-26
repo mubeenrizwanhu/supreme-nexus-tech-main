@@ -967,7 +967,6 @@ function BookingForm() {
             </form>
           )}
         </FadeUpItem>
-        </FadeUpItem>
       </FadeUpSection>
     </section>
   );
