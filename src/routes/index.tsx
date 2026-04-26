@@ -8,6 +8,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { HeroVisual } from "@/components/site/HeroVisual";
 import { Counter } from "@/components/site/Counter";
 import { MagneticButton } from "@/components/site/MagneticButton";
@@ -35,8 +45,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const BOOKING_URL = "https://cal.com/supreme-nexus/strategy-call";
-
 const NAV = [
   { label: "Services", href: "#services" },
   { label: "Process", href: "#process" },
@@ -63,9 +71,7 @@ function CTAButton({
   return (
     <MagneticButton className={isFullWidth ? "w-full" : ""}>
       <a
-        href={BOOKING_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+        href="#book"
         className={`group inline-flex items-center justify-center gap-2 rounded-xl bg-primary font-semibold text-primary-foreground transition-all duration-200 cta-glow hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${sizing} ${className}`}
       >
         {children}
@@ -658,6 +664,125 @@ function FinalCTA() {
   );
 }
 
+function BookingForm() {
+  return (
+    <section id="book" className="py-24 md:py-32 relative overflow-hidden border-t border-[color:var(--border)]">
+      <div className="pointer-events-none absolute inset-0 grid-bg radial-fade opacity-20" />
+      <div
+        className="pointer-events-none absolute -bottom-40 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(closest-side, color-mix(in oklab, var(--primary) 15%, transparent), transparent)",
+        }}
+      />
+      
+      <FadeUpSection className="mx-auto max-w-4xl px-5 md:px-8 relative z-10">
+        <div className="text-center mb-16">
+          <FadeUpItem>
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--primary)] font-bold">
+              Secure your strategy call
+            </span>
+            <h2 className="mt-4 font-display text-4xl font-bold tracking-tight text-foreground md:text-6xl">
+              Ready to <span className="text-[color:var(--primary)]">Scale?</span>
+            </h2>
+            <p className="mt-6 text-base text-muted md:text-lg max-w-xl mx-auto leading-relaxed">
+              Book your conversion audit and strategy call. No pitch, just performance and a clear roadmap to more booked calls.
+            </p>
+          </FadeUpItem>
+        </div>
+
+        <FadeUpItem className="rounded-[2.5rem] border border-[color:var(--border)] bg-surface/30 backdrop-blur-2xl p-8 md:p-14 shadow-[0_30px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden group transition-all duration-500 hover:border-[color:var(--primary)]/20">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[color:var(--primary)]/40 to-transparent" />
+          
+          <form className="grid gap-x-8 gap-y-7 md:grid-cols-2" onSubmit={(e) => e.preventDefault()}>
+            <div className="space-y-2.5">
+              <Label htmlFor="name" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Full Name</Label>
+              <Input 
+                id="name" 
+                placeholder="John Doe" 
+                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
+              />
+            </div>
+            <div className="space-y-2.5">
+              <Label htmlFor="email" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Work Email</Label>
+              <Input 
+                id="email" 
+                type="email" 
+                placeholder="john@company.com" 
+                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
+              />
+            </div>
+            <div className="space-y-2.5">
+              <Label htmlFor="company" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Company Name</Label>
+              <Input 
+                id="company" 
+                placeholder="Acme Inc." 
+                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
+              />
+            </div>
+            <div className="space-y-2.5">
+              <Label htmlFor="website" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Website URL</Label>
+              <Input 
+                id="website" 
+                placeholder="https://example.com" 
+                className="bg-background/40 border-white/5 h-13 rounded-xl px-5 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all border-none ring-1 ring-white/5" 
+              />
+            </div>
+            <div className="space-y-2.5 md:col-span-2">
+              <Label htmlFor="revenue" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Current Monthly Revenue</Label>
+              <Select>
+                <SelectTrigger className="bg-background/40 border-none ring-1 ring-white/5 h-13 rounded-xl px-5 focus:ring-[color:var(--primary)] focus:bg-background/60 transition-all">
+                  <SelectValue placeholder="Select revenue range" />
+                </SelectTrigger>
+                <SelectContent className="bg-elevated/95 backdrop-blur-xl border-white/10 rounded-xl">
+                  <SelectItem value="under-10k">Under $10k/mo</SelectItem>
+                  <SelectItem value="10k-50k">$10k - $50k/mo</SelectItem>
+                  <SelectItem value="50k-100k">$50k - $100k/mo</SelectItem>
+                  <SelectItem value="100k-plus">$100k+/mo</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2.5 md:col-span-2">
+              <Label htmlFor="message" className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted ml-1">Biggest conversion bottleneck?</Label>
+              <Textarea 
+                id="message" 
+                placeholder="Tell us about your current challenges..." 
+                className="bg-background/40 border-none ring-1 ring-white/5 min-h-[120px] rounded-xl px-5 py-4 focus-visible:ring-[color:var(--primary)] focus-visible:bg-background/60 transition-all resize-none" 
+              />
+            </div>
+            <div className="md:col-span-2 pt-6">
+              <button 
+                type="submit"
+                className="group relative w-full h-15 rounded-xl bg-primary font-display text-xl font-bold text-primary-foreground transition-all duration-300 hover:shadow-[0_0_50px_-5px_color-mix(in_oklab,var(--primary)_60%,transparent)] hover:-translate-y-1 active:scale-[0.98] overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  Claim Your Strategy Call
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+                <div className="absolute inset-0 bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
+              </button>
+              <div className="flex items-center justify-center gap-6 mt-6">
+                <div className="flex items-center gap-2">
+                  <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
+                  <span className="text-[10px] font-mono text-muted uppercase tracking-widest">No Pitch</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
+                  <span className="text-[10px] font-mono text-muted uppercase tracking-widest">Pure Value</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
+                  <span className="text-[10px] font-mono text-muted uppercase tracking-widest">1:1 Audit</span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </FadeUpItem>
+      </FadeUpSection>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="border-t border-[color:var(--border)] bg-background/40 backdrop-blur-md py-12">
@@ -745,6 +870,7 @@ function Index() {
         <Results />
         <FAQ />
         <FinalCTA />
+        <BookingForm />
       </main>
       <Footer />
       <MobileStickyCTA />
