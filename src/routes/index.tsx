@@ -737,10 +737,7 @@ function Results() {
               <blockquote className="font-display text-lg leading-snug text-foreground md:text-xl">
                 “{q.quote}”
               </blockquote>
-              <figcaption className="mt-5 flex items-center gap-3">
-                <div className="h-8 w-8 rounded-full overflow-hidden">
-                  <img src="/logo-transparent.png" alt="" className="h-full w-full object-cover" />
-                </div>
+              <figcaption className="mt-5 flex items-center">
                 <div className="flex flex-col text-left">
                   <span className="font-display text-sm font-bold text-foreground">
                     {q.name}
