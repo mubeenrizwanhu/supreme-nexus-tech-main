@@ -841,35 +841,101 @@ const FAQS = [
 ];
 
 function FAQ() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <section
       id="faq"
-      className="border-t border-[color:var(--border)] bg-surface/10 backdrop-blur-sm py-24 md:py-32"
+      className="border-t border-[color:var(--border)] bg-surface/10 backdrop-blur-sm py-24 md:py-32 relative overflow-hidden"
     >
-      <FadeUpSection className="mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-12 md:px-8">
-        <FadeUpItem className="md:col-span-4">
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
+      {/* Ambient background glows */}
+      <motion.div 
+        className="absolute top-1/2 left-0 w-96 h-96 bg-[color:var(--primary)] opacity-[0.03] blur-[100px] rounded-full pointer-events-none"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.02, 0.04, 0.02] 
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
+      <FadeUpSection className="mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-12 md:px-8 relative z-10">
+        <FadeUpItem className="md:col-span-4 relative">
+          {/* Scanning Line Utility */}
+          <div className="absolute -left-4 top-0 h-full w-px bg-gradient-to-b from-transparent via-[color:var(--primary)] to-transparent opacity-30 hidden md:block" />
+          
+          <motion.div 
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)] inline-flex items-center gap-2"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--primary)] animate-pulse" />
             FAQ
-          </span>
+          </motion.div>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-            Answers before the call.
+            Answers before the <span className="text-[color:var(--primary)] relative inline-block">
+              call.
+              <motion.span 
+                className="absolute bottom-1 left-0 right-0 h-1 bg-[color:var(--primary)]/30 -z-10"
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+              />
+            </span>
           </h2>
+          <p className="mt-4 text-sm text-muted">
+            Everything you need to know about how we work, who we work with, and what to expect from an engagement.
+          </p>
         </FadeUpItem>
         <FadeUpItem className="md:col-span-8">
           <Accordion type="single" collapsible className="w-full">
             {FAQS.map((f, i) => (
-              <AccordionItem
+              <motion.div
                 key={f.q}
-                value={`item-${i}`}
-                className="border-b border-[color:var(--border)]"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className="relative group"
               >
-                <AccordionTrigger className="py-5 text-left font-display text-base font-semibold text-foreground hover:no-underline md:text-lg">
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent className="pb-5 text-sm leading-relaxed text-muted md:text-[15px]">
-                  {f.a}
-                </AccordionContent>
-              </AccordionItem>
+                {/* Subtle left indicator line on hover */}
+                <motion.div 
+                  className="absolute -left-4 top-0 h-full w-0.5 bg-[color:var(--primary)] rounded-full origin-top hidden md:block"
+                  initial={{ scaleY: 0, opacity: 0 }}
+                  animate={{ 
+                    scaleY: hoveredIndex === i ? 1 : 0,
+                    opacity: hoveredIndex === i ? 1 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+                
+                {/* Background glow sweep */}
+                <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-[color:var(--primary)]/[0.03] to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none" />
+
+                <AccordionItem
+                  value={`item-${i}`}
+                  className="border-b border-[color:var(--border)] transition-colors duration-300 group-hover:border-[color:var(--primary)]/30 relative bg-transparent"
+                >
+                  <AccordionTrigger className="py-6 text-left font-display text-base font-semibold text-foreground hover:no-underline md:text-lg group-hover:text-[color:var(--primary)] transition-colors duration-300">
+                    <span className="flex items-center gap-4">
+                      <span className="font-mono text-[10px] text-muted group-hover:text-[color:var(--primary)]/60 transition-colors">
+                        /0{i + 1}
+                      </span>
+                      {f.q}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-6 text-sm leading-relaxed text-muted md:text-[15px]">
+                    <motion.div
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="pl-8 border-l border-white/5 ml-2.5"
+                    >
+                      {f.a}
+                    </motion.div>
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </FadeUpItem>
