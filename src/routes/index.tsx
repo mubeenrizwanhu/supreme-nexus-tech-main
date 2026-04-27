@@ -694,7 +694,7 @@ function Results() {
     <section id="results" className="py-24 md:py-32 relative overflow-hidden">
       {/* Dynamic Background Glows */}
       <motion.div 
-        className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[color:var(--primary)] opacity-[0.02] blur-[120px] rounded-full pointer-events-none"
+        className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[color:var(--success)] opacity-[0.02] blur-[120px] rounded-full pointer-events-none"
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.02, 0.04, 0.02] 
@@ -715,16 +715,16 @@ function Results() {
           <motion.div 
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)] inline-flex items-center gap-2"
+            className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--success)] inline-flex items-center gap-2"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--primary)] animate-pulse" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--success)] animate-pulse" />
             Results
           </motion.div>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Performance you can <span className="relative inline-block">
               <span className="relative z-10 text-white">measure.</span>
               <motion.span 
-                className="absolute bottom-1 left-0 right-0 h-2 bg-[color:var(--primary)]/30 -z-10"
+                className="absolute bottom-1 left-0 right-0 h-2 bg-[color:var(--success)]/30 -z-10"
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
                 transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
@@ -741,13 +741,13 @@ function Results() {
           {METRICS.map((m, i) => (
             <FadeUpItem
               key={m.label}
-              className="group relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-6 transition-all duration-500 hover:bg-surface/50 hover:border-[color:var(--primary)]/30 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_color-mix(in_oklab,var(--primary)_20%,transparent)]"
+              className="group relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-6 transition-all duration-500 hover:bg-surface/50 hover:border-[color:var(--success)]/30 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_color-mix(in_oklab,var(--success)_20%,transparent)]"
             >
               {/* Sweep effect */}
-              <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-[color:var(--primary)]/[0.08] to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none" />
+              <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-[color:var(--success)]/[0.08] to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none" />
               
               <div className="relative z-10">
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted group-hover:text-[color:var(--primary)] transition-colors duration-300">
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted group-hover:text-[color:var(--success)] transition-colors duration-300">
                   {m.label}
                 </span>
                 <div className="mt-4 flex items-baseline gap-1">
@@ -755,7 +755,7 @@ function Results() {
                     <Counter to={m.value} suffix={m.suffix} decimals={m.decimals ?? 0} />
                   </span>
                 </div>
-                <div className="mt-3 flex items-center gap-2 text-xs text-[color:var(--success)] group-hover:text-[color:var(--primary)] transition-colors duration-300">
+                <div className="mt-3 flex items-center gap-2 text-xs text-[color:var(--success)] group-hover:text-[color:var(--success)] transition-colors duration-300">
                   <motion.span 
                     className="h-1 w-1 rounded-full bg-current" 
                     animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
@@ -775,7 +775,7 @@ function Results() {
               className="group relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9 transition-all duration-500 hover:bg-surface/40 hover:border-white/10"
             >
               {/* Large quote mark in background */}
-              <div className="absolute -top-6 -left-2 text-9xl font-display text-white/[0.02] group-hover:text-[color:var(--primary)]/[0.05] transition-colors duration-500 pointer-events-none select-none">
+              <div className="absolute -top-6 -left-2 text-9xl font-display text-white/[0.02] group-hover:text-[color:var(--success)]/[0.05] transition-colors duration-500 pointer-events-none select-none">
                 "
               </div>
 
@@ -788,7 +788,7 @@ function Results() {
                 </blockquote>
                 <figcaption className="mt-8 flex items-center justify-between border-t border-white/5 pt-5 group-hover:border-white/10 transition-colors duration-300">
                   <div className="flex flex-col text-left">
-                    <span className="font-display text-sm font-bold text-foreground group-hover:text-[color:var(--primary)] transition-colors duration-300">
+                    <span className="font-display text-sm font-bold text-foreground group-hover:text-[color:var(--success)] transition-colors duration-300">
                       {q.name}
                     </span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted mt-0.5">
@@ -801,7 +801,7 @@ function Results() {
                     {[0, 1, 2].map((dot) => (
                       <motion.div
                         key={dot}
-                        className="w-1 h-1 rounded-full bg-[color:var(--primary)]"
+                        className="w-1 h-1 rounded-full bg-[color:var(--success)]"
                         animate={{ y: [0, -3, 0] }}
                         transition={{ duration: 0.6, repeat: Infinity, delay: dot * 0.1 }}
                       />
