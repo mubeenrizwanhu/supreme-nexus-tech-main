@@ -615,19 +615,21 @@ function Process() {
         </FadeUpItem>
 
         <div className="relative mt-20">
-          {/* Animated Connecting Line (Desktop) */}
-          <div className="absolute left-8 right-8 top-[34px] hidden h-[2px] md:block bg-surface/40 overflow-hidden rounded-full">
-            <motion.div 
-              className="h-full w-full bg-gradient-to-r from-transparent via-[color:var(--primary)] to-transparent"
-              initial={{ x: "-100%" }}
-              whileInView={{ x: "100%" }}
-              transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
-            />
-          </div>
-          
           <div className="grid gap-10 md:grid-cols-4 md:gap-6">
             {STEPS.map((s, i) => (
               <FadeUpItem key={s.n} className="relative group">
+                {/* Connecting Line to next step */}
+                {i < STEPS.length - 1 && (
+                  <div className="absolute left-[68px] top-[34px] w-[calc(100%+1.5rem-68px)] hidden h-[2px] md:block bg-surface/40 overflow-hidden">
+                    <motion.div 
+                      className="h-full w-full bg-gradient-to-r from-transparent via-[color:var(--primary)] to-transparent"
+                      initial={{ x: "-100%" }}
+                      whileInView={{ x: "100%" }}
+                      transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: i * 0.4 }}
+                    />
+                  </div>
+                )}
+
                 <motion.div 
                   className="relative z-10 mb-6 flex h-[68px] w-[68px] items-center justify-center rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md transition-all duration-500 group-hover:bg-surface/50 group-hover:border-[color:var(--primary)]/50 group-hover:shadow-[0_0_30px_-5px_color-mix(in_oklab,var(--primary)_30%,transparent)] group-hover:-translate-y-1"
                   whileHover={{ scale: 1.05 }}
@@ -636,11 +638,11 @@ function Process() {
                   transition={{ delay: i * 0.1 }}
                 >
                   <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_50%_50%,color-mix(in_oklab,var(--primary)_20%,transparent),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <span className="font-display text-2xl font-bold text-foreground/80 group-hover:text-[color:var(--primary)] transition-colors duration-300">
+                  <span className="font-display text-2xl font-bold text-foreground/80 group-hover:text-foreground transition-colors duration-300">
                     {s.n}
                   </span>
                   {/* Outer animated ring on hover */}
-                  <div className="absolute -inset-2 rounded-3xl border border-[color:var(--primary)]/0 group-hover:border-[color:var(--primary)]/20 transition-all duration-500 group-hover:animate-[spin_10s_linear_infinite] pointer-events-none" style={{ borderStyle: 'dashed' }} />
+                  <div className="absolute -inset-2 rounded-3xl border border-[color:var(--primary)]/0 group-hover:border-[color:var(--primary)]/30 transition-all duration-500 group-hover:animate-[spin_10s_linear_infinite] pointer-events-none" style={{ borderStyle: 'dashed' }} />
                 </motion.div>
                 
                 <div className="relative pt-2">
@@ -649,8 +651,8 @@ function Process() {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 + i * 0.1 }}
                   >
-                    <h3 className="font-display text-xl font-bold text-foreground group-hover:text-white transition-colors duration-300">{s.t}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted group-hover:text-muted/90 transition-colors duration-300">{s.d}</p>
+                    <h3 className="font-display text-xl font-bold text-foreground group-hover:text-[color:var(--primary)] transition-colors duration-300">{s.t}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted group-hover:text-foreground/80 transition-colors duration-300">{s.d}</p>
                   </motion.div>
 
                   {/* Subtle active state indicator */}
