@@ -594,37 +594,68 @@ function Process() {
   return (
     <section
       id="process"
-      className="border-y border-[color:var(--border)] bg-surface/10 backdrop-blur-sm py-24 md:py-32"
+      className="border-y border-[color:var(--border)] bg-surface/10 backdrop-blur-sm py-24 md:py-32 relative overflow-hidden"
     >
-      <FadeUpSection className="mx-auto max-w-7xl px-5 md:px-8">
+      {/* Ambient background glows */}
+      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[color:var(--primary)] opacity-[0.03] blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[color:var(--accent-blue)] opacity-[0.03] blur-[120px] rounded-full pointer-events-none" />
+
+      <FadeUpSection className="mx-auto max-w-7xl px-5 md:px-8 relative z-10">
         <FadeUpItem className="mb-16 max-w-xl">
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
+          <motion.span 
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]"
+          >
             Process
-          </span>
+          </motion.span>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-            Four steps. No guesswork.
+            Four steps. <span className="text-white">No guesswork.</span>
           </h2>
         </FadeUpItem>
 
-        <div className="relative">
-          {/* connecting line desktop */}
-          <div
-            className="absolute left-0 right-0 top-[34px] hidden h-px md:block"
-            style={{
-              background:
-                "linear-gradient(90deg, transparent, color-mix(in oklab, var(--primary) 50%, transparent), transparent)",
-            }}
-          />
+        <div className="relative mt-20">
+          {/* Animated Connecting Line (Desktop) */}
+          <div className="absolute left-8 right-8 top-[34px] hidden h-[2px] md:block bg-surface/40 overflow-hidden rounded-full">
+            <motion.div 
+              className="h-full w-full bg-gradient-to-r from-transparent via-[color:var(--primary)] to-transparent"
+              initial={{ x: "-100%" }}
+              whileInView={{ x: "100%" }}
+              transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+            />
+          </div>
+          
           <div className="grid gap-10 md:grid-cols-4 md:gap-6">
-            {STEPS.map((s) => (
-              <FadeUpItem key={s.n} className="relative">
-                <div className="relative z-10 mb-5 flex h-[68px] w-[68px] items-center justify-center rounded-2xl border border-[color:var(--border)] bg-elevated/40 backdrop-blur-md shadow-[0_0_20px_-5px_color-mix(in_oklab,var(--primary)_20%,transparent)]">
-                  <span className="font-display text-2xl font-bold text-[color:var(--primary)]">
+            {STEPS.map((s, i) => (
+              <FadeUpItem key={s.n} className="relative group">
+                <motion.div 
+                  className="relative z-10 mb-6 flex h-[68px] w-[68px] items-center justify-center rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md transition-all duration-500 group-hover:bg-surface/50 group-hover:border-[color:var(--primary)]/50 group-hover:shadow-[0_0_30px_-5px_color-mix(in_oklab,var(--primary)_30%,transparent)] group-hover:-translate-y-1"
+                  whileHover={{ scale: 1.05 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_50%_50%,color-mix(in_oklab,var(--primary)_20%,transparent),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <span className="font-display text-2xl font-bold text-foreground/80 group-hover:text-[color:var(--primary)] transition-colors duration-300">
                     {s.n}
                   </span>
+                  {/* Outer animated ring on hover */}
+                  <div className="absolute -inset-2 rounded-3xl border border-[color:var(--primary)]/0 group-hover:border-[color:var(--primary)]/20 transition-all duration-500 group-hover:animate-[spin_10s_linear_infinite] pointer-events-none" style={{ borderStyle: 'dashed' }} />
+                </motion.div>
+                
+                <div className="relative pt-2">
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 + i * 0.1 }}
+                  >
+                    <h3 className="font-display text-xl font-bold text-foreground group-hover:text-white transition-colors duration-300">{s.t}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted group-hover:text-muted/90 transition-colors duration-300">{s.d}</p>
+                  </motion.div>
+
+                  {/* Subtle active state indicator */}
+                  <div className="absolute -left-4 top-2 h-0 w-1 bg-[color:var(--primary)]/50 rounded-full transition-all duration-500 group-hover:h-full opacity-0 group-hover:opacity-100 hidden md:block" />
                 </div>
-                <h3 className="font-display text-lg font-bold text-foreground">{s.t}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{s.d}</p>
               </FadeUpItem>
             ))}
           </div>
