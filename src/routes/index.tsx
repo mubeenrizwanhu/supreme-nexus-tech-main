@@ -101,7 +101,7 @@ function Logo() {
   return (
     <a href="#top" className="flex items-center gap-2.5">
       <div className="h-8 w-8 rounded-full overflow-hidden">
-        <img src="/favicon-96x96.png" alt="Supreme Nexus Logo" className="h-full w-full object-cover" />
+        <img src="/logo-transparent.png" alt="Supreme Nexus Logo" className="h-full w-full object-cover" />
       </div>
       <span className="font-display text-[17px] font-bold tracking-tight text-foreground">
         Supreme<span className="text-[color:var(--primary)]">.</span>Nexus
@@ -561,7 +561,7 @@ function Results() {
               </blockquote>
               <figcaption className="mt-5 flex items-center gap-3">
                 <div className="h-8 w-8 rounded-full overflow-hidden">
-                  <img src="/favicon-96x96.png" alt="" className="h-full w-full object-cover" />
+                  <img src="/logo-transparent.png" alt="" className="h-full w-full object-cover" />
                 </div>
                 <div className="flex flex-col text-left">
                   <span className="font-display text-sm font-bold text-foreground">

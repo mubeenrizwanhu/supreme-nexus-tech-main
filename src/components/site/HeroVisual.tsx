@@ -148,7 +148,7 @@ export function HeroVisual() {
           style={{ borderColor: "rgba(255,255,255,0.08)" }}
         >
           <div className="h-4 w-4 rounded-full overflow-hidden">
-            <img src="/favicon-96x96.png" alt="" className="h-full w-full object-cover" />
+            <img src="/logo-transparent.png" alt="" className="h-full w-full object-cover" />
           </div>
           <span className="font-mono text-[10px] uppercase tracking-widest text-muted">
             Verified · System

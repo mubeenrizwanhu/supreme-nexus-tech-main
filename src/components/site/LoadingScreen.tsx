@@ -40,7 +40,7 @@ export function LoadingScreen() {
           >
             <div className="flex items-center gap-3">
               <div className="relative h-12 w-12 overflow-hidden rounded-full border border-white/10 ring-1 ring-white/5">
-                <img src="/favicon-96x96.png" alt="Supreme Nexus" className="h-full w-full object-cover" />
+                <img src="/logo-transparent.png" alt="Supreme Nexus" className="h-full w-full object-cover" />
               </div>
               <span className="font-display text-2xl font-bold tracking-tight text-foreground">
                 Supreme<span className="text-[color:var(--primary)]">.</span>Nexus
