@@ -291,62 +291,207 @@ const FIXES = [
 
 function ProblemOutcome() {
   return (
-    <FadeUpSection className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <FadeUpItem className="mb-14 max-w-2xl">
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
-            The gap
-          </span>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-            Most businesses don't have a traffic problem.
-            <span className="text-muted"> They have a conversion problem.</span>
-          </h2>
-        </FadeUpItem>
+    <FadeUpSection className="py-24 md:py-32 relative overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-1/4 -right-20 w-64 h-64 bg-[color:var(--primary)] opacity-[0.03] blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-[color:var(--accent-blue)] opacity-[0.03] blur-[120px] rounded-full pointer-events-none" />
 
-        <div className="grid gap-6 md:grid-cols-2">
-          <FadeUpItem className="rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9">
-            <div className="mb-5 flex items-center gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-                What's leaking
-              </span>
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <FadeUpItem className="max-w-2xl">
+            <motion.span 
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)] mb-4 block"
+            >
+              The gap
+            </motion.span>
+            <h2 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-6xl leading-[1.1]">
+              Most businesses don't have a <span className="text-white">traffic problem.</span>
+              <br />
+              <motion.span 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="text-muted/60"
+              >
+                They have a <span className="text-[color:var(--primary)] relative">
+                  conversion problem.
+                  <motion.svg 
+                    viewBox="0 0 300 20" 
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[color:var(--primary)] opacity-40"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    transition={{ delay: 1, duration: 1.2 }}
+                  >
+                    <path d="M5 15 Q 150 5 295 15" fill="transparent" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                  </motion.svg>
+                </span>
+              </motion.span>
+            </h2>
+          </FadeUpItem>
+
+          <FadeUpItem className="hidden lg:block">
+            <div className="relative h-32 w-48 flex items-center justify-center">
+              {/* Funnel Leak Animation */}
+              <svg viewBox="0 0 100 100" className="w-full h-full text-[color:var(--primary)]">
+                <defs>
+                  <linearGradient id="leakGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="currentColor" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path d="M20 20 L80 20 L60 70 L40 70 Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.3" />
+                <motion.path 
+                  d="M45 70 L45 95" 
+                  stroke="url(#leakGrad)" 
+                  strokeWidth="2" 
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                />
+                <motion.path 
+                  d="M55 70 L55 95" 
+                  stroke="url(#leakGrad)" 
+                  strokeWidth="2" 
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: 0.7 }}
+                />
+                <motion.path 
+                  d="M50 70 L50 90" 
+                  stroke="url(#leakGrad)" 
+                  strokeWidth="2" 
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: 1.4 }}
+                />
+              </svg>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 font-mono text-[9px] uppercase tracking-widest text-muted opacity-40">
+                Incoming Traffic
+              </div>
             </div>
-            <ul className="space-y-4">
-              {LEAKS.map((l) => (
-                <li key={l} className="flex items-start gap-3">
-                  <Minus className="mt-1 h-4 w-4 shrink-0 text-muted" />
-                  <span className="text-sm text-foreground/85 md:text-[15px]">{l}</span>
-                </li>
+          </FadeUpItem>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          {/* Leak Card */}
+          <FadeUpItem className="group relative rounded-3xl border border-[color:var(--border)] bg-surface/20 backdrop-blur-md p-8 md:p-10 transition-all duration-500 hover:border-white/10 hover:bg-surface/30">
+            <div className="mb-8 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-2 w-2 rounded-full bg-red-500/50 animate-pulse" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+                  What's leaking
+                </span>
+              </div>
+              <Minus className="h-4 w-4 text-muted/30" />
+            </div>
+            
+            <ul className="space-y-6">
+              {LEAKS.map((l, i) => (
+                <motion.li 
+                  key={l} 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * i }}
+                  className="flex items-start gap-4"
+                >
+                  <div className="mt-1.5 h-1 w-1 rounded-full bg-muted/40 shrink-0" />
+                  <span className="text-base text-foreground/70 group-hover:text-foreground/90 transition-colors">{l}</span>
+                </motion.li>
               ))}
             </ul>
           </FadeUpItem>
 
+          {/* Fix Card - The Premium Bucket */}
           <FadeUpItem
-            className="rounded-2xl border p-7 md:p-9 backdrop-blur-md"
+            className="group relative rounded-3xl border p-8 md:p-10 backdrop-blur-xl overflow-hidden shadow-2xl"
             style={{
-              borderColor: "color-mix(in oklab, var(--primary) 30%, transparent)",
-              background:
-                "linear-gradient(180deg, color-mix(in oklab, var(--primary) 6%, var(--surface)), var(--surface))",
+              borderColor: "color-mix(in oklab, var(--primary) 20%, transparent)",
             }}
           >
-            <div className="mb-5 flex items-center gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
-                What we fix
-              </span>
+            {/* Premium Animated Background */}
+            <div className="absolute inset-0 bg-surface/40 pointer-events-none" />
+            <motion.div 
+              className="absolute inset-0 opacity-20 pointer-events-none"
+              animate={{ 
+                background: [
+                  "radial-gradient(circle at 20% 20%, var(--primary) 0%, transparent 50%)",
+                  "radial-gradient(circle at 80% 80%, var(--primary) 0%, transparent 50%)",
+                  "radial-gradient(circle at 20% 20%, var(--primary) 0%, transparent 50%)",
+                ]
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            />
+            <div className="absolute -inset-[100%] bg-[radial-gradient(40%_40%_at_50%_50%,color-mix(in_oklab,var(--primary)_15%,transparent)_0%,transparent_100%)] group-hover:animate-pulse-slow pointer-events-none" />
+            
+            {/* Scanning Line Utility */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-right from-transparent via-[color:var(--primary)] to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan pointer-events-none" />
+
+            <div className="relative">
+              <div className="mb-8 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-[color:var(--primary)] animate-pulse shadow-[0_0_8px_var(--primary)]" />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--primary)] font-bold">
+                    What we fix
+                  </span>
+                </div>
+                <div className="flex gap-1">
+                  <div className="h-1 w-4 rounded-full bg-[color:var(--primary)]/20" />
+                  <div className="h-1 w-1 rounded-full bg-[color:var(--primary)]/20" />
+                </div>
+              </div>
+              
+              <ul className="space-y-6">
+                {FIXES.map((f, i) => (
+                  <motion.li 
+                    key={f} 
+                    initial={{ opacity: 0, x: 10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 + (0.1 * i) }}
+                    className="flex items-start gap-4"
+                  >
+                    <div className="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-[color:var(--primary)]/10 border border-[color:var(--primary)]/20 shrink-0">
+                      <Check className="h-3.5 w-3.5 text-[color:var(--primary)]" />
+                    </div>
+                    <span className="text-base font-medium text-foreground group-hover:text-[color:var(--primary)] transition-colors duration-300">
+                      {f}
+                    </span>
+                  </motion.li>
+                ))}
+              </ul>
+
+              <motion.div 
+                className="mt-10 pt-8 border-t border-white/5"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Efficiency Matrix</span>
+                  <div className="flex items-end gap-1 h-4">
+                    {[0.4, 0.7, 0.5, 0.9, 0.6, 1].map((h, i) => (
+                      <motion.div 
+                        key={i}
+                        className="w-1 bg-[color:var(--primary)]/40 rounded-full"
+                        animate={{ height: [`${h*100}%`, `${(h*0.5)*100}%`, `${h*100}%`] }}
+                        transition={{ repeat: Infinity, duration: 1.5 + i*0.2, ease: "easeInOut" }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
-            <ul className="space-y-4">
-              {FIXES.map((f) => (
-                <li key={f} className="flex items-start gap-3">
-                  <Check className="mt-1 h-4 w-4 shrink-0 text-[color:var(--primary)]" />
-                  <span className="text-sm text-foreground/95 md:text-[15px]">{f}</span>
-                </li>
-              ))}
-            </ul>
           </FadeUpItem>
         </div>
       </div>
     </FadeUpSection>
   );
 }
+
 
 const SERVICES = [
   {

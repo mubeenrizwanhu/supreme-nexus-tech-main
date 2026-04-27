@@ -258,4 +258,15 @@
   .animate-line-flow {
     animation: line-flow 3s linear infinite;
   }
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.15;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
+  }
 }
