@@ -23,9 +23,28 @@ def generate_icon(size, output_name, make_circular=False):
         if size <= 64:
             resized_logo = resized_logo.filter(ImageFilter.SHARPEN)
         
-        # 3. Create canvas (Solid Black Background)
-        # For home screen icons, we want the full background to show
-        canvas = Image.new('RGBA', (size, size), (0, 0, 0, 255))
+        # 3. BACKGROUND REMOVAL (If circular/transparent)
+        if make_circular:
+            datas = resized_logo.getdata()
+            new_data = []
+            for item in datas:
+                r, g, b, a = item
+                # brightness-based transparency
+                brightness = max(r, g, b)
+                if brightness < 10:
+                    new_data.append((0, 0, 0, 0))
+                else:
+                    # Keep color but apply a smooth alpha based on brightness
+                    # This preserves the glowing edges
+                    new_alpha = min(255, int(255 * (brightness / 255.0) ** 0.5 * 1.5))
+                    new_data.append((r, g, b, new_alpha))
+            resized_logo.putdata(new_data)
+            
+            # Canvas is fully transparent for circular icons
+            canvas = Image.new('RGBA', (size, size), (0, 0, 0, 0))
+        else:
+            # Solid black canvas for Home Screen icons
+            canvas = Image.new('RGBA', (size, size), (0, 0, 0, 255))
         
         # 4. Calculate position with offsets
         pos_x = (size - logo_w) // 2
@@ -36,8 +55,8 @@ def generate_icon(size, output_name, make_circular=False):
         # 5. Paste logo
         canvas.paste(resized_logo, (pos_x, pos_y), resized_logo)
         
+        # 6. Apply smooth circular mask ONLY if requested
         if make_circular:
-            # 6. Apply smooth circular mask ONLY if requested (for tabs)
             oversample = 4
             mask_size = size * oversample
             mask = Image.new('L', (mask_size, mask_size), 0)
@@ -48,14 +67,13 @@ def generate_icon(size, output_name, make_circular=False):
             final_output = Image.new('RGBA', (size, size), (0, 0, 0, 0))
             final_output.paste(canvas, (0, 0), mask)
         else:
-            # For Home Screen, return the solid square canvas
             final_output = canvas
         
         # 7. Save
         final_output.save(os.path.join(output_dir, output_name), 'PNG', optimize=True)
         return final_output
 
-# --- GENERATE TABS ICONS (CIRCULAR) ---
+# --- GENERATE TABS & UI ICONS (CIRCULAR & TRANSPARENT) ---
 generate_icon(16, 'favicon-16x16.png', make_circular=True)
 generate_icon(32, 'favicon-32x32.png', make_circular=True)
 generate_icon(96, 'favicon-96x96.png', make_circular=True)
@@ -68,7 +86,7 @@ for size in ico_sizes:
     ico_images.append(generate_icon(size, f'temp_{size}.png', make_circular=True))
 ico_images[0].save(os.path.join(output_dir, 'favicon.ico'), format='ICO', sizes=[(s, s) for s in ico_sizes], append_images=ico_images[1:])
 
-# --- GENERATE HOME SCREEN ICONS (SQUARE / APP-STYLE) ---
+# --- GENERATE HOME SCREEN ICONS (SQUARE / SOLID BLACK) ---
 generate_icon(180, 'apple-touch-icon.png', make_circular=False)
 generate_icon(192, 'web-app-manifest-192x192.png', make_circular=False)
 generate_icon(512, 'web-app-manifest-512x512.png', make_circular=False)
@@ -78,4 +96,4 @@ for size in ico_sizes:
     temp_path = os.path.join(output_dir, f'temp_{size}.png')
     if os.path.exists(temp_path): os.remove(temp_path)
 
-print("Split-style icons (Circular tabs / Square Home Screen) published successfully.")
+print("Transparency engine: UI icons are now transparent, Home Screen icons remain solid.")
