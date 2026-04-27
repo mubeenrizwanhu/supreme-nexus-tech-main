@@ -313,7 +313,7 @@ function ProblemOutcome() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-muted/60"
+                className="text-foreground/80"
               >
                 They have a <span className="text-[color:var(--primary)] relative">
                   conversion problem.
