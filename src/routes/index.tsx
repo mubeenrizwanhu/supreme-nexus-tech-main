@@ -691,14 +691,45 @@ const QUOTES = [
 
 function Results() {
   return (
-    <section id="results" className="py-24 md:py-32">
-      <FadeUpSection className="mx-auto max-w-7xl px-5 md:px-8">
+    <section id="results" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Dynamic Background Glows */}
+      <motion.div 
+        className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[color:var(--primary)] opacity-[0.02] blur-[120px] rounded-full pointer-events-none"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.02, 0.04, 0.02] 
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-white opacity-[0.01] blur-[100px] rounded-full pointer-events-none"
+        animate={{ 
+          scale: [1, 1.5, 1],
+          opacity: [0.01, 0.03, 0.01] 
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
+
+      <FadeUpSection className="mx-auto max-w-7xl px-5 md:px-8 relative z-10">
         <FadeUpItem className="mb-14 max-w-2xl">
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]">
+          <motion.div 
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)] inline-flex items-center gap-2"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--primary)] animate-pulse" />
             Results
-          </span>
+          </motion.div>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-            Performance you can measure.
+            Performance you can <span className="relative inline-block">
+              <span className="relative z-10 text-white">measure.</span>
+              <motion.span 
+                className="absolute bottom-1 left-0 right-0 h-2 bg-[color:var(--primary)]/30 -z-10"
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+              />
+            </span>
           </h2>
           <p className="mt-4 text-sm text-muted md:text-base">
             Representative ranges from conversion engagements. Numbers vary by offer, traffic
@@ -707,46 +738,77 @@ function Results() {
         </FadeUpItem>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {METRICS.map((m) => (
+          {METRICS.map((m, i) => (
             <FadeUpItem
               key={m.label}
-              className="rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-6"
+              className="group relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-6 transition-all duration-500 hover:bg-surface/50 hover:border-[color:var(--primary)]/30 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_color-mix(in_oklab,var(--primary)_20%,transparent)]"
             >
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-                {m.label}
-              </span>
-              <div className="mt-4 flex items-baseline gap-1">
-                <span className="font-display text-4xl font-bold text-foreground md:text-5xl">
-                  <Counter to={m.value} suffix={m.suffix} decimals={m.decimals ?? 0} />
+              {/* Sweep effect */}
+              <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-[color:var(--primary)]/[0.08] to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none" />
+              
+              <div className="relative z-10">
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted group-hover:text-[color:var(--primary)] transition-colors duration-300">
+                  {m.label}
                 </span>
+                <div className="mt-4 flex items-baseline gap-1">
+                  <span className="font-display text-4xl font-bold text-foreground md:text-5xl group-hover:text-white transition-colors duration-300">
+                    <Counter to={m.value} suffix={m.suffix} decimals={m.decimals ?? 0} />
+                  </span>
+                </div>
+                <div className="mt-3 flex items-center gap-2 text-xs text-[color:var(--success)] group-hover:text-[color:var(--primary)] transition-colors duration-300">
+                  <motion.span 
+                    className="h-1 w-1 rounded-full bg-current" 
+                    animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+                  />
+                  {m.note}
+                </div>
               </div>
-              <span className="mt-3 inline-flex items-center gap-2 text-xs text-[color:var(--success)]">
-                <span className="h-1 w-1 rounded-full bg-[color:var(--success)]" />
-                {m.note}
-              </span>
             </FadeUpItem>
           ))}
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {QUOTES.map((q) => (
+          {QUOTES.map((q, i) => (
             <FadeUpItem
               key={q.name + q.role}
-              className="rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9"
+              className="group relative overflow-hidden rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md p-7 md:p-9 transition-all duration-500 hover:bg-surface/40 hover:border-white/10"
             >
-              <blockquote className="font-display text-lg leading-snug text-foreground md:text-xl">
-                “{q.quote}”
-              </blockquote>
-              <figcaption className="mt-5 flex items-center">
-                <div className="flex flex-col text-left">
-                  <span className="font-display text-sm font-bold text-foreground">
-                    {q.name}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-                    {q.role}
-                  </span>
-                </div>
-              </figcaption>
+              {/* Large quote mark in background */}
+              <div className="absolute -top-6 -left-2 text-9xl font-display text-white/[0.02] group-hover:text-[color:var(--primary)]/[0.05] transition-colors duration-500 pointer-events-none select-none">
+                "
+              </div>
+
+              {/* Background sweep */}
+              <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/[0.03] to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none" />
+
+              <div className="relative z-10">
+                <blockquote className="font-display text-lg leading-snug text-foreground md:text-xl group-hover:text-white transition-colors duration-300">
+                  "{q.quote}"
+                </blockquote>
+                <figcaption className="mt-8 flex items-center justify-between border-t border-white/5 pt-5 group-hover:border-white/10 transition-colors duration-300">
+                  <div className="flex flex-col text-left">
+                    <span className="font-display text-sm font-bold text-foreground group-hover:text-[color:var(--primary)] transition-colors duration-300">
+                      {q.name}
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted mt-0.5">
+                      {q.role}
+                    </span>
+                  </div>
+                  
+                  {/* Small animated indicator on hover */}
+                  <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {[0, 1, 2].map((dot) => (
+                      <motion.div
+                        key={dot}
+                        className="w-1 h-1 rounded-full bg-[color:var(--primary)]"
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ duration: 0.6, repeat: Infinity, delay: dot * 0.1 }}
+                      />
+                    ))}
+                  </div>
+                </figcaption>
+              </div>
             </FadeUpItem>
           ))}
         </div>
