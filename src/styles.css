@@ -8,6 +8,14 @@
 @import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
+@font-face {
+  font-family: 'Brave Eighty One Round';
+  src: url('/BraveEightyOneRound.ttf/BRAVEEightyone-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
  * Design system definition.
  *
@@ -67,6 +75,7 @@
   --color-elevated: var(--elevated);
   --color-accent-blue: var(--accent-blue);
   --color-success: var(--success);
+  --font-brand: "Brave Eighty One Round", sans-serif;
   --font-display: "Cabinet Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;

@@ -99,12 +99,12 @@ function CTAButton({
 
 function Logo() {
   return (
-    <a href="#top" className="flex items-center gap-2.5">
-      <div className="h-8 w-8 rounded-full overflow-hidden">
+    <a href="#top" className="flex items-center gap-3 group">
+      <div className="h-8 w-8 rounded-full overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-300">
         <img src="/logo-transparent.png" alt="Supreme Nexus Logo" className="h-full w-full object-cover" />
       </div>
-      <span className="font-display text-[17px] font-bold tracking-tight text-foreground">
-        Supreme<span className="text-[color:var(--primary)]">.</span>Nexus
+      <span className="font-brand text-[19px] tracking-wide text-foreground uppercase group-hover:drop-shadow-[0_0_15px_color-mix(in_oklab,var(--primary)_40%,transparent)] transition-all duration-300">
+        SUPREME <span className="text-[color:var(--primary)]">NEXUS</span>
       </span>
     </a>
   );
@@ -299,7 +299,7 @@ function ProblemOutcome() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <FadeUpItem className="max-w-2xl">
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)] mb-4 block"
@@ -309,7 +309,7 @@ function ProblemOutcome() {
             <h2 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-6xl leading-[1.1]">
               Most businesses don't have a <span className="text-white">traffic problem.</span>
               <br />
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
@@ -317,8 +317,8 @@ function ProblemOutcome() {
               >
                 They have a <span className="text-[color:var(--primary)] relative">
                   conversion problem.
-                  <motion.svg 
-                    viewBox="0 0 300 20" 
+                  <motion.svg
+                    viewBox="0 0 300 20"
                     className="absolute -bottom-2 left-0 w-full h-3 text-[color:var(--primary)] opacity-40"
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
@@ -342,28 +342,28 @@ function ProblemOutcome() {
                   </linearGradient>
                 </defs>
                 <path d="M20 20 L80 20 L60 70 L40 70 Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.3" />
-                <motion.path 
-                  d="M45 70 L45 95" 
-                  stroke="url(#leakGrad)" 
-                  strokeWidth="2" 
+                <motion.path
+                  d="M45 70 L45 95"
+                  stroke="url(#leakGrad)"
+                  strokeWidth="2"
                   strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
                   transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
                 />
-                <motion.path 
-                  d="M55 70 L55 95" 
-                  stroke="url(#leakGrad)" 
-                  strokeWidth="2" 
+                <motion.path
+                  d="M55 70 L55 95"
+                  stroke="url(#leakGrad)"
+                  strokeWidth="2"
                   strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
                   transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: 0.7 }}
                 />
-                <motion.path 
-                  d="M50 70 L50 90" 
-                  stroke="url(#leakGrad)" 
-                  strokeWidth="2" 
+                <motion.path
+                  d="M50 70 L50 90"
+                  stroke="url(#leakGrad)"
+                  strokeWidth="2"
                   strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
@@ -389,11 +389,11 @@ function ProblemOutcome() {
               </div>
               <Minus className="h-4 w-4 text-muted/30" />
             </div>
-            
+
             <ul className="space-y-6">
               {LEAKS.map((l, i) => (
-                <motion.li 
-                  key={l} 
+                <motion.li
+                  key={l}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 * i }}
@@ -415,9 +415,9 @@ function ProblemOutcome() {
           >
             {/* Premium Animated Background */}
             <div className="absolute inset-0 bg-surface/40 pointer-events-none" />
-            <motion.div 
+            <motion.div
               className="absolute inset-0 opacity-20 pointer-events-none"
-              animate={{ 
+              animate={{
                 background: [
                   "radial-gradient(circle at 20% 20%, var(--primary) 0%, transparent 50%)",
                   "radial-gradient(circle at 80% 80%, var(--primary) 0%, transparent 50%)",
@@ -427,7 +427,7 @@ function ProblemOutcome() {
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             />
             <div className="absolute -inset-[100%] bg-[radial-gradient(40%_40%_at_50%_50%,color-mix(in_oklab,var(--primary)_15%,transparent)_0%,transparent_100%)] group-hover:animate-pulse-slow pointer-events-none" />
-            
+
             {/* Scanning Line Utility */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-right from-transparent via-[color:var(--primary)] to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan pointer-events-none" />
 
@@ -444,11 +444,11 @@ function ProblemOutcome() {
                   <div className="h-1 w-1 rounded-full bg-[color:var(--primary)]/20" />
                 </div>
               </div>
-              
+
               <ul className="space-y-6">
                 {FIXES.map((f, i) => (
-                  <motion.li 
-                    key={f} 
+                  <motion.li
+                    key={f}
                     initial={{ opacity: 0, x: 10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 + (0.1 * i) }}
@@ -464,7 +464,7 @@ function ProblemOutcome() {
                 ))}
               </ul>
 
-              <motion.div 
+              <motion.div
                 className="mt-10 pt-8 border-t border-white/5"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -474,11 +474,11 @@ function ProblemOutcome() {
                   <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Efficiency Matrix</span>
                   <div className="flex items-end gap-1 h-4">
                     {[0.4, 0.7, 0.5, 0.9, 0.6, 1].map((h, i) => (
-                      <motion.div 
+                      <motion.div
                         key={i}
                         className="w-1 bg-[color:var(--primary)]/40 rounded-full"
-                        animate={{ height: [`${h*100}%`, `${(h*0.5)*100}%`, `${h*100}%`] }}
-                        transition={{ repeat: Infinity, duration: 1.5 + i*0.2, ease: "easeInOut" }}
+                        animate={{ height: [`${h * 100}%`, `${(h * 0.5) * 100}%`, `${h * 100}%`] }}
+                        transition={{ repeat: Infinity, duration: 1.5 + i * 0.2, ease: "easeInOut" }}
                       />
                     ))}
                   </div>
@@ -602,7 +602,7 @@ function Process() {
 
       <FadeUpSection className="mx-auto max-w-7xl px-5 md:px-8 relative z-10">
         <FadeUpItem className="mb-16 max-w-xl">
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)]"
@@ -621,7 +621,7 @@ function Process() {
                 {/* Connecting Line to next step */}
                 {i < STEPS.length - 1 && (
                   <div className="absolute left-[68px] top-[34px] w-[calc(100%+1.5rem-68px)] hidden h-[2px] md:block bg-surface/40 overflow-hidden">
-                    <motion.div 
+                    <motion.div
                       className="h-full w-full bg-gradient-to-r from-transparent via-[color:var(--primary)] to-transparent"
                       initial={{ x: "-100%" }}
                       whileInView={{ x: "100%" }}
@@ -630,7 +630,7 @@ function Process() {
                   </div>
                 )}
 
-                <motion.div 
+                <motion.div
                   className="relative z-10 mb-6 flex h-[68px] w-[68px] items-center justify-center rounded-2xl border border-[color:var(--border)] bg-surface/30 backdrop-blur-md transition-all duration-500 group-hover:bg-surface/50 group-hover:border-[color:var(--primary)]/50 group-hover:shadow-[0_0_30px_-5px_color-mix(in_oklab,var(--primary)_30%,transparent)] group-hover:-translate-y-1"
                   whileHover={{ scale: 1.05 }}
                   initial={{ opacity: 0, y: 20 }}
@@ -644,7 +644,7 @@ function Process() {
                   {/* Outer animated ring on hover */}
                   <div className="absolute -inset-2 rounded-3xl border border-[color:var(--primary)]/0 group-hover:border-[color:var(--primary)]/30 transition-all duration-500 group-hover:animate-[spin_10s_linear_infinite] pointer-events-none" style={{ borderStyle: 'dashed' }} />
                 </motion.div>
-                
+
                 <div className="relative pt-2">
                   <motion.div
                     initial={{ opacity: 0, x: -10 }}
@@ -693,26 +693,26 @@ function Results() {
   return (
     <section id="results" className="py-24 md:py-32 relative overflow-hidden">
       {/* Dynamic Background Glows */}
-      <motion.div 
+      <motion.div
         className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[color:var(--success)] opacity-[0.02] blur-[120px] rounded-full pointer-events-none"
-        animate={{ 
+        animate={{
           scale: [1, 1.2, 1],
-          opacity: [0.02, 0.04, 0.02] 
+          opacity: [0.02, 0.04, 0.02]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div 
+      <motion.div
         className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-white opacity-[0.01] blur-[100px] rounded-full pointer-events-none"
-        animate={{ 
+        animate={{
           scale: [1, 1.5, 1],
-          opacity: [0.01, 0.03, 0.01] 
+          opacity: [0.01, 0.03, 0.01]
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
 
       <FadeUpSection className="mx-auto max-w-7xl px-5 md:px-8 relative z-10">
         <FadeUpItem className="mb-14 max-w-2xl">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--success)] inline-flex items-center gap-2"
@@ -723,7 +723,7 @@ function Results() {
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Performance you can <span className="relative inline-block">
               <span className="relative z-10 text-white">measure.</span>
-              <motion.span 
+              <motion.span
                 className="absolute bottom-1 left-0 right-0 h-2 bg-[color:var(--success)]/30 -z-10"
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
@@ -745,7 +745,7 @@ function Results() {
             >
               {/* Sweep effect */}
               <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-[color:var(--success)]/[0.08] to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none" />
-              
+
               <div className="relative z-10">
                 <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted group-hover:text-[color:var(--success)] transition-colors duration-300">
                   {m.label}
@@ -756,8 +756,8 @@ function Results() {
                   </span>
                 </div>
                 <div className="mt-3 flex items-center gap-2 text-xs text-[color:var(--success)] group-hover:text-[color:var(--success)] transition-colors duration-300">
-                  <motion.span 
-                    className="h-1 w-1 rounded-full bg-current" 
+                  <motion.span
+                    className="h-1 w-1 rounded-full bg-current"
                     animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
                     transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
                   />
@@ -795,7 +795,7 @@ function Results() {
                       {q.role}
                     </span>
                   </div>
-                  
+
                   {/* Small animated indicator on hover */}
                   <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {[0, 1, 2].map((dot) => (
@@ -849,21 +849,21 @@ function FAQ() {
       className="border-t border-[color:var(--border)] bg-surface/10 backdrop-blur-sm py-24 md:py-32 relative overflow-hidden"
     >
       {/* Ambient background glows */}
-      <motion.div 
+      <motion.div
         className="absolute top-1/2 left-0 w-96 h-96 bg-[color:var(--primary)] opacity-[0.03] blur-[100px] rounded-full pointer-events-none"
-        animate={{ 
+        animate={{
           scale: [1, 1.2, 1],
-          opacity: [0.02, 0.04, 0.02] 
+          opacity: [0.02, 0.04, 0.02]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
-      
+
       <FadeUpSection className="mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-12 md:px-8 relative z-10">
         <FadeUpItem className="md:col-span-4 relative">
           {/* Scanning Line Utility */}
           <div className="absolute -left-4 top-0 h-full w-px bg-gradient-to-b from-transparent via-[color:var(--primary)] to-transparent opacity-30 hidden md:block" />
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--primary)] inline-flex items-center gap-2"
@@ -874,7 +874,7 @@ function FAQ() {
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Answers before the <span className="text-[color:var(--primary)] relative inline-block">
               call.
-              <motion.span 
+              <motion.span
                 className="absolute bottom-1 left-0 right-0 h-1 bg-[color:var(--primary)]/30 -z-10"
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
@@ -899,16 +899,16 @@ function FAQ() {
                 className="relative group"
               >
                 {/* Subtle left indicator line on hover */}
-                <motion.div 
+                <motion.div
                   className="absolute -left-4 top-0 h-full w-0.5 bg-[color:var(--primary)] rounded-full origin-top hidden md:block"
                   initial={{ scaleY: 0, opacity: 0 }}
-                  animate={{ 
+                  animate={{
                     scaleY: hoveredIndex === i ? 1 : 0,
                     opacity: hoveredIndex === i ? 1 : 0
                   }}
                   transition={{ duration: 0.3 }}
                 />
-                
+
                 {/* Background glow sweep */}
                 <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-[color:var(--primary)]/[0.03] to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none" />
 

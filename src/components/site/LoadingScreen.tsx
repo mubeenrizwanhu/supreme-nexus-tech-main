@@ -44,25 +44,25 @@ export function LoadingScreen() {
         <motion.div
           key="loading-screen"
           initial={{ opacity: 1 }}
-          exit={{ 
+          exit={{
             opacity: 0,
             y: "-100%",
-            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 } 
+            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }
           }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background overflow-hidden"
         >
           {/* Ambient Backgrounds */}
-          <motion.div 
+          <motion.div
             className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-[color:var(--primary)] opacity-[0.03] blur-[100px] rounded-full pointer-events-none"
-            animate={{ 
+            animate={{
               scale: [1, 1.2, 1],
               opacity: [0.02, 0.05, 0.02]
             }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
-          <motion.div 
+          <motion.div
             className="absolute bottom-1/4 -left-20 w-[600px] h-[600px] bg-[color:var(--accent-blue)] opacity-[0.03] blur-[120px] rounded-full pointer-events-none"
-            animate={{ 
+            animate={{
               scale: [1, 1.5, 1],
               opacity: [0.02, 0.04, 0.02]
             }}
@@ -81,16 +81,16 @@ export function LoadingScreen() {
             <div className="flex items-center gap-4">
               <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/10 ring-1 ring-white/5 bg-surface/50 backdrop-blur-md flex items-center justify-center">
                 <img src="/logo-transparent.png" alt="Supreme Nexus" className="h-full w-full object-cover relative z-10" />
-                
+
                 {/* Scanning line effect on logo */}
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-gradient-to-b from-transparent via-[color:var(--primary)]/30 to-transparent h-1/2 z-20"
                   animate={{ y: ["-100%", "200%"] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
                 />
               </div>
-              <span className="font-display text-3xl font-bold tracking-tight text-foreground">
-                Supreme<span className="text-[color:var(--primary)]">.</span>Nexus
+              <span className="font-brand text-3xl tracking-wide text-foreground uppercase drop-shadow-[0_0_15px_color-mix(in_oklab,var(--primary)_20%,transparent)]">
+                SUPREME <span className="text-[color:var(--primary)]">NEXUS</span>
               </span>
             </div>
           </motion.div>
@@ -112,12 +112,12 @@ export function LoadingScreen() {
                   </motion.span>
                 </AnimatePresence>
               </div>
-              
+
               <span className="font-mono text-[11px] text-[color:var(--primary)] shrink-0 font-bold ml-4">
                 {Math.min(100, Math.round(progress))}%
               </span>
             </div>
-            
+
             <div className="relative h-[2px] w-full bg-surface rounded-full overflow-hidden">
               <motion.div
                 className="absolute top-0 left-0 h-full bg-[color:var(--primary)]"
@@ -129,7 +129,7 @@ export function LoadingScreen() {
                 }}
               />
               {/* Sweep effect on progress bar */}
-              <motion.div 
+              <motion.div
                 className="absolute top-0 left-0 h-full bg-white/50 w-20 blur-[2px]"
                 animate={{ x: ["-100%", "400%"] }}
                 transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
