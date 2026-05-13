@@ -1565,41 +1565,24 @@ function BookingForm() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[color:var(--border)] bg-background/40 backdrop-blur-md py-12">
+    <footer className="border-t border-[color:var(--border)] bg-background/40 backdrop-blur-md py-16">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-8">
-            <Logo />
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Conversion systems for businesses that want more qualified leads and more booked
-              calls.
-            </p>
-          </div>
-          <div className="md:col-span-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-              Navigate
-            </span>
-            <ul className="mt-4 space-y-2.5">
-              {NAV.map((n) => (
-                <li key={n.href}>
-                  <a
-                    href={n.href}
-                    className="text-sm text-foreground/85 hover:text-[color:var(--primary)]"
-                  >
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="flex flex-col items-center text-center">
+          <Logo />
+          <p className="mt-6 max-w-md text-[15px] leading-relaxed text-muted">
+            Conversion systems for businesses that want more qualified leads and more booked calls.
+          </p>
         </div>
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-[color:var(--border)] pt-6 md:flex-row md:items-center">
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+        
+        <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-[color:var(--border)] pt-8 md:flex-row">
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted/60">
             © {new Date().getFullYear()} Supreme Nexus · All rights reserved
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-            Built for booked calls
-          </span>
+          <div className="flex items-center gap-8">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted/60">
+              Built for booked calls
+            </span>
+          </div>
         </div>
       </div>
     </footer>
