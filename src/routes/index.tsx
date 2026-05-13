@@ -1575,11 +1575,11 @@ function Footer() {
         </div>
         
         <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-[color:var(--border)] pt-8 md:flex-row">
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted/60">
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white">
             © {new Date().getFullYear()} Supreme Nexus · All rights reserved
           </span>
           <div className="flex items-center gap-8">
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted/60">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white">
               Built for booked calls
             </span>
           </div>
