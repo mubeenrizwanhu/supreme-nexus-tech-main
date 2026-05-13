@@ -1568,7 +1568,7 @@ function Footer() {
     <footer className="border-t border-[color:var(--border)] bg-background/40 backdrop-blur-md py-12">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
+          <div className="md:col-span-8">
             <Logo />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
               Conversion systems for businesses that want more qualified leads and more booked
@@ -1591,14 +1591,6 @@ function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="md:col-span-3">
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-              Ready?
-            </span>
-            <div className="mt-4">
-              <CTAButton size="sm" />
-            </div>
           </div>
         </div>
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-[color:var(--border)] pt-6 md:flex-row md:items-center">
