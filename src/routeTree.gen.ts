@@ -10,11 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as FaviconEditorRouteImport } from './routes/favicon-editor'
+import { Route as ArticlesRouteImport } from './routes/articles'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArticlesSpeedToLeadMathematicsRouteImport } from './routes/articles.speed-to-lead-mathematics'
+import { Route as ArticlesLeakyBucketFunnelsRouteImport } from './routes/articles.leaky-bucket-funnels'
+import { Route as ArticlesFrictionlessFormDesignRouteImport } from './routes/articles.frictionless-form-design'
 
 const FaviconEditorRoute = FaviconEditorRouteImport.update({
   id: '/favicon-editor',
   path: '/favicon-editor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesRoute = ArticlesRouteImport.update({
+  id: '/articles',
+  path: '/articles',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,30 +31,80 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArticlesSpeedToLeadMathematicsRoute =
+  ArticlesSpeedToLeadMathematicsRouteImport.update({
+    id: '/speed-to-lead-mathematics',
+    path: '/speed-to-lead-mathematics',
+    getParentRoute: () => ArticlesRoute,
+  } as any)
+const ArticlesLeakyBucketFunnelsRoute =
+  ArticlesLeakyBucketFunnelsRouteImport.update({
+    id: '/leaky-bucket-funnels',
+    path: '/leaky-bucket-funnels',
+    getParentRoute: () => ArticlesRoute,
+  } as any)
+const ArticlesFrictionlessFormDesignRoute =
+  ArticlesFrictionlessFormDesignRouteImport.update({
+    id: '/frictionless-form-design',
+    path: '/frictionless-form-design',
+    getParentRoute: () => ArticlesRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesRouteWithChildren
   '/favicon-editor': typeof FaviconEditorRoute
+  '/articles/frictionless-form-design': typeof ArticlesFrictionlessFormDesignRoute
+  '/articles/leaky-bucket-funnels': typeof ArticlesLeakyBucketFunnelsRoute
+  '/articles/speed-to-lead-mathematics': typeof ArticlesSpeedToLeadMathematicsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesRouteWithChildren
   '/favicon-editor': typeof FaviconEditorRoute
+  '/articles/frictionless-form-design': typeof ArticlesFrictionlessFormDesignRoute
+  '/articles/leaky-bucket-funnels': typeof ArticlesLeakyBucketFunnelsRoute
+  '/articles/speed-to-lead-mathematics': typeof ArticlesSpeedToLeadMathematicsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesRouteWithChildren
   '/favicon-editor': typeof FaviconEditorRoute
+  '/articles/frictionless-form-design': typeof ArticlesFrictionlessFormDesignRoute
+  '/articles/leaky-bucket-funnels': typeof ArticlesLeakyBucketFunnelsRoute
+  '/articles/speed-to-lead-mathematics': typeof ArticlesSpeedToLeadMathematicsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/favicon-editor'
+  fullPaths:
+    | '/'
+    | '/articles'
+    | '/favicon-editor'
+    | '/articles/frictionless-form-design'
+    | '/articles/leaky-bucket-funnels'
+    | '/articles/speed-to-lead-mathematics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/favicon-editor'
-  id: '__root__' | '/' | '/favicon-editor'
+  to:
+    | '/'
+    | '/articles'
+    | '/favicon-editor'
+    | '/articles/frictionless-form-design'
+    | '/articles/leaky-bucket-funnels'
+    | '/articles/speed-to-lead-mathematics'
+  id:
+    | '__root__'
+    | '/'
+    | '/articles'
+    | '/favicon-editor'
+    | '/articles/frictionless-form-design'
+    | '/articles/leaky-bucket-funnels'
+    | '/articles/speed-to-lead-mathematics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArticlesRoute: typeof ArticlesRouteWithChildren
   FaviconEditorRoute: typeof FaviconEditorRoute
 }
 
@@ -58,6 +117,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaviconEditorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/articles': {
+      id: '/articles'
+      path: '/articles'
+      fullPath: '/articles'
+      preLoaderRoute: typeof ArticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -65,11 +131,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/articles/speed-to-lead-mathematics': {
+      id: '/articles/speed-to-lead-mathematics'
+      path: '/speed-to-lead-mathematics'
+      fullPath: '/articles/speed-to-lead-mathematics'
+      preLoaderRoute: typeof ArticlesSpeedToLeadMathematicsRouteImport
+      parentRoute: typeof ArticlesRoute
+    }
+    '/articles/leaky-bucket-funnels': {
+      id: '/articles/leaky-bucket-funnels'
+      path: '/leaky-bucket-funnels'
+      fullPath: '/articles/leaky-bucket-funnels'
+      preLoaderRoute: typeof ArticlesLeakyBucketFunnelsRouteImport
+      parentRoute: typeof ArticlesRoute
+    }
+    '/articles/frictionless-form-design': {
+      id: '/articles/frictionless-form-design'
+      path: '/frictionless-form-design'
+      fullPath: '/articles/frictionless-form-design'
+      preLoaderRoute: typeof ArticlesFrictionlessFormDesignRouteImport
+      parentRoute: typeof ArticlesRoute
+    }
   }
 }
 
+interface ArticlesRouteChildren {
+  ArticlesFrictionlessFormDesignRoute: typeof ArticlesFrictionlessFormDesignRoute
+  ArticlesLeakyBucketFunnelsRoute: typeof ArticlesLeakyBucketFunnelsRoute
+  ArticlesSpeedToLeadMathematicsRoute: typeof ArticlesSpeedToLeadMathematicsRoute
+}
+
+const ArticlesRouteChildren: ArticlesRouteChildren = {
+  ArticlesFrictionlessFormDesignRoute: ArticlesFrictionlessFormDesignRoute,
+  ArticlesLeakyBucketFunnelsRoute: ArticlesLeakyBucketFunnelsRoute,
+  ArticlesSpeedToLeadMathematicsRoute: ArticlesSpeedToLeadMathematicsRoute,
+}
+
+const ArticlesRouteWithChildren = ArticlesRoute._addFileChildren(
+  ArticlesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArticlesRoute: ArticlesRouteWithChildren,
   FaviconEditorRoute: FaviconEditorRoute,
 }
 export const routeTree = rootRouteImport
