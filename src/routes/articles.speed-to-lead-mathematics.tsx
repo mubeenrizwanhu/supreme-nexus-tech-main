@@ -10,9 +10,17 @@ export const Route = createFileRoute("/articles/speed-to-lead-mathematics")({
       { title: "Speed to Lead: The Math of 5-Minute Response Windows — Supreme Nexus" },
       {
         name: "description",
-        content:
-          "Explore the mathematical decay curve of lead conversion intent and how reducing latency to under 5 minutes increases contact rates by 391%.",
+        content: "Explore the mathematical decay curve of lead conversion intent and how reducing latency to under 5 minutes increases contact rates by 391%.",
       },
+      { property: "og:title", content: "Speed to Lead: The Math of 5-Minute Response Windows — Supreme Nexus" },
+      {
+        property: "og:description",
+        content: "Explore the mathematical decay curve of lead conversion intent and how reducing latency to under 5 minutes increases contact rates by 391%.",
+      },
+      { property: "og:image", content: "https://supremenexus.tech/logo.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://supremenexus.tech/articles/speed-to-lead-mathematics" },
     ],
   }),
   component: SpeedToLeadArticle,

@@ -10,9 +10,17 @@ export const Route = createFileRoute("/articles/leaky-bucket-funnels")({
       { title: "The Leaky Bucket: How B2B Funnels Lose 60%+ of Leads — Supreme Nexus" },
       {
         name: "description",
-        content:
-          "Analyze the structural bottlenecks, cognitive drop-offs, and message misalignment that bleed B2B marketing funnels of ready-to-buy pipeline.",
+        content: "Analyze the structural bottlenecks, cognitive drop-offs, and message misalignment that bleed B2B marketing funnels of ready-to-buy pipeline.",
       },
+      { property: "og:title", content: "The Leaky Bucket: How B2B Funnels Lose 60%+ of Leads — Supreme Nexus" },
+      {
+        property: "og:description",
+        content: "Analyze the structural bottlenecks, cognitive drop-offs, and message misalignment that bleed B2B marketing funnels of ready-to-buy pipeline.",
+      },
+      { property: "og:image", content: "https://supremenexus.tech/logo.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://supremenexus.tech/articles/leaky-bucket-funnels" },
     ],
   }),
   component: LeakyBucketArticle,

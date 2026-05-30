@@ -9,6 +9,24 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 
 export const Route = createFileRoute("/favicon-editor")({
+  head: () => ({
+    meta: [
+      { title: "Nexus Lab — Free High-Resolution Favicon Crop & Alignment Tool" },
+      {
+        name: "description",
+        content: "Crop, zoom, and generate favicon manifests for high-performance sites.",
+      },
+      { property: "og:title", content: "Nexus Lab — Free High-Resolution Favicon Crop & Alignment Tool" },
+      {
+        property: "og:description",
+        content: "Crop, zoom, and generate favicon manifests for high-performance sites.",
+      },
+      { property: "og:image", content: "https://supremenexus.tech/logo.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://supremenexus.tech/favicon-editor" },
+    ],
+  }),
   component: FaviconEditor,
 });
 

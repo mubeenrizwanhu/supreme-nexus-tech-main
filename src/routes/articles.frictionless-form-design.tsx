@@ -10,9 +10,17 @@ export const Route = createFileRoute("/articles/frictionless-form-design")({
       { title: "Frictionless Conversion: Redesigning Lead Forms — Supreme Nexus" },
       {
         name: "description",
-        content:
-          "Explore the cognitive psychology and design principles behind frictionless lead generation forms that increase conversion rate without reducing lead quality.",
+        content: "Explore the cognitive psychology and design principles behind frictionless lead generation forms that increase conversion rate without reducing lead quality.",
       },
+      { property: "og:title", content: "Frictionless Conversion: Redesigning Lead Forms — Supreme Nexus" },
+      {
+        property: "og:description",
+        content: "Explore the cognitive psychology and design principles behind frictionless lead generation forms that increase conversion rate without reducing lead quality.",
+      },
+      { property: "og:image", content: "https://supremenexus.tech/logo.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://supremenexus.tech/articles/frictionless-form-design" },
     ],
   }),
   component: FrictionlessFormsArticle,

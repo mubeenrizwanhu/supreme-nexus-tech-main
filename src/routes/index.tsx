@@ -47,15 +47,17 @@ export const Route = createFileRoute("/")({
       { title: "Supreme Nexus — Turn More Traffic Into Qualified Leads" },
       {
         name: "description",
-        content:
-          "Conversion systems that turn traffic into qualified leads and booked strategy calls. Funnel optimization, lead generation, appointment-focused growth.",
+        content: "Conversion systems that turn traffic into booked strategy calls.",
       },
       { property: "og:title", content: "Supreme Nexus — Turn More Traffic Into Qualified Leads" },
       {
         property: "og:description",
-        content:
-          "Conversion systems that turn traffic into qualified leads and booked strategy calls.",
+        content: "Conversion systems that turn traffic into booked strategy calls.",
       },
+      { property: "og:image", content: "https://supremenexus.tech/logo.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://supremenexus.tech/" },
     ],
   }),
   component: Index,

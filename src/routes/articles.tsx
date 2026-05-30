@@ -10,15 +10,17 @@ export const Route = createFileRoute("/articles")({
       { title: "B2B Conversion Insights — Supreme Nexus Articles" },
       {
         name: "description",
-        content:
-          "Deep-dive conversion rate optimization (CRO) analysis, speed-to-lead mathematics, and frictionless B2B form design principles.",
+        content: "Deep-dive CRO, speed-to-lead, and funnel optimizations.",
       },
       { property: "og:title", content: "B2B Conversion Insights — Supreme Nexus Articles" },
       {
         property: "og:description",
-        content:
-          "Deep-dive conversion rate optimization (CRO) analysis, speed-to-lead mathematics, and frictionless B2B form design principles.",
+        content: "Deep-dive CRO, speed-to-lead, and funnel optimizations.",
       },
+      { property: "og:image", content: "https://supremenexus.tech/logo.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://supremenexus.tech/articles" },
     ],
   }),
   component: ArticlesHub,
