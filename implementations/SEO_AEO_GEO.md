@@ -19,10 +19,10 @@ graph TD
 
 ## 📝 Execution Checklist
 
-- [/] **1. On-Page Content Architecture**
+- [x] **1. On-Page Content Architecture**
   - [x] 1.1 Landing Page FAQs (10 Optimized Items)
   - [x] 1.2 The Articles Component & Pages (`/articles`)
-  - [ ] 1.3 Footer "Freshness" Signal
+  - [x] 1.3 Footer "Freshness" Signal
 - [ ] **2. In-Code Structured Data Injection (JSON-LD)**
 - [ ] **3. Metadata & Page Audit Setup**
 - [ ] **4. Complete Sitemap Mapping (`sitemap.xml`)**
