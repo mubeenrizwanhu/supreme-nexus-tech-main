@@ -68,6 +68,7 @@ const NAV = [
   { label: "Process", href: "#process" },
   { label: "Results", href: "#results" },
   { label: "FAQ", href: "#faq" },
+  { label: "Articles", href: "/articles" },
 ];
 
 function CTAButton({
@@ -1601,6 +1602,13 @@ function Footer() {
             © {new Date().getFullYear()} Supreme Nexus · Content Verified & Updated for Q2 {new Date().getFullYear()}
           </span>
           <div className="flex items-center gap-8">
+            <a
+              href="/articles"
+              className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/60 hover:text-white transition-colors"
+            >
+              Articles
+            </a>
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/20">|</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white">
               Built for booked calls
             </span>

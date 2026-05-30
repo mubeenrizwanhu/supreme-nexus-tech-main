@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, ArrowRight, BookOpen, Sparkles, TrendingUp } from "lucide-react";
 import { MagneticButton } from "@/components/site/MagneticButton";
@@ -23,8 +23,15 @@ export const Route = createFileRoute("/articles")({
       { rel: "canonical", href: "https://supremenexus.tech/articles" },
     ],
   }),
-  component: ArticlesHub,
+  component: ArticlesLayout,
 });
+
+function ArticlesLayout() {
+  const location = useLocation();
+  const isHub = location.pathname === "/articles" || location.pathname === "/articles/";
+
+  return isHub ? <ArticlesHub /> : <Outlet />;
+}
 
 const ARTICLES = [
   {
@@ -34,9 +41,9 @@ const ARTICLES = [
     readTime: "6 min read",
     tag: "Funnel Auditing",
     icon: Sparkles,
-    gradient: "from-cyan-500/10 via-blue-500/5 to-transparent",
-    hoverBorder: "hover:border-cyan-500/40",
-    accentColor: "text-cyan-400"
+    gradient: "from-primary/10 via-primary/5 to-transparent",
+    hoverBorder: "hover:border-primary/40",
+    accentColor: "text-primary"
   },
   {
     slug: "speed-to-lead-mathematics",
@@ -45,9 +52,9 @@ const ARTICLES = [
     readTime: "5 min read",
     tag: "Pipeline Speed",
     icon: TrendingUp,
-    gradient: "from-emerald-500/10 via-teal-500/5 to-transparent",
-    hoverBorder: "hover:border-emerald-500/40",
-    accentColor: "text-emerald-400"
+    gradient: "from-primary/10 via-accent-blue/5 to-transparent",
+    hoverBorder: "hover:border-primary/40",
+    accentColor: "text-primary"
   },
   {
     slug: "frictionless-form-design",
@@ -56,9 +63,9 @@ const ARTICLES = [
     readTime: "7 min read",
     tag: "CRO & UI/UX",
     icon: BookOpen,
-    gradient: "from-purple-500/10 via-indigo-500/5 to-transparent",
-    hoverBorder: "hover:border-purple-500/40",
-    accentColor: "text-purple-400"
+    gradient: "from-primary/10 via-accent-blue/5 to-transparent",
+    hoverBorder: "hover:border-primary/40",
+    accentColor: "text-primary"
   }
 ];
 
@@ -91,19 +98,19 @@ function ArticlesHub() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white selection:bg-cyan-500/30 overflow-x-hidden relative pb-24">
+    <div className="min-h-screen bg-background text-foreground selection:bg-[color:var(--primary)]/30 overflow-x-hidden relative pb-24">
       {/* Floating background blobs */}
-      <div className="absolute top-[20%] left-[-10%] w-[35%] h-[35%] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-10%] w-[35%] h-[35%] bg-purple-500/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[20%] left-[-10%] w-[35%] h-[35%] bg-[color:var(--primary)]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[35%] h-[35%] bg-[color:var(--accent-blue)]/3 bg-purple-500/3 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Floating navigation header */}
-      <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#020202]/40 backdrop-blur-xl transition-all duration-300">
+      <nav className="fixed inset-x-0 top-0 z-50 border-b border-[color:var(--border)] bg-background/40 backdrop-blur-xl transition-all duration-300">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="h-8 w-8 rounded-full overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-300">
               <img src="/logo-transparent.png" alt="Supreme Nexus Logo" className="h-full w-full object-cover" />
             </div>
-            <span className="font-brand text-[19px] tracking-wide text-white uppercase group-hover:drop-shadow-[0_0_15px_rgba(16,214,197,0.4)] transition-all duration-300">
+            <span className="font-brand text-[19px] tracking-wide text-foreground uppercase group-hover:drop-shadow-[0_0_15px_rgba(16,214,197,0.4)] transition-all duration-300">
               SUPREME <span className="text-[color:var(--primary)]">NEXUS</span>
             </span>
           </Link>
@@ -129,11 +136,11 @@ function ArticlesHub() {
           className="max-w-3xl mx-auto"
         >
           <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full mb-6">
-            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-cyan-400 uppercase">CONVERSION INTEL</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-primary uppercase">CONVERSION INTEL</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-b from-white via-white/90 to-white/40 bg-clip-text text-transparent italic">
-            B2B CONVERSION <span className="text-cyan-400">INSIGHTS</span>
+            B2B CONVERSION <span className="text-primary">INSIGHTS</span>
           </h1>
           <p className="text-base md:text-xl text-white/60 leading-relaxed max-w-2xl mx-auto font-light">
             Empirical analyses, quantitative engineering breakdowns, and tactical guides to stop marketing leaks and accelerate sales pipeline.
@@ -179,7 +186,7 @@ function ArticlesHub() {
                     </div>
 
                     {/* Content */}
-                    <h3 className="font-display text-xl md:text-2xl font-bold leading-snug mb-4 group-hover:text-cyan-400 transition-colors duration-300">
+                    <h3 className="font-display text-xl md:text-2xl font-bold leading-snug mb-4 group-hover:text-primary transition-colors duration-300">
                       {article.title}
                     </h3>
                     <p className="text-sm md:text-[15px] leading-relaxed text-white/50 font-light mb-8 group-hover:text-white/60 transition-colors duration-300">
@@ -190,7 +197,7 @@ function ArticlesHub() {
                   {/* CTA link */}
                   <Link
                     to={`/articles/${article.slug}`}
-                    className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-cyan-400 group-hover:text-white transition-colors mt-auto"
+                    className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-primary group-hover:text-white transition-colors mt-auto"
                   >
                     Read Detailed Case
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

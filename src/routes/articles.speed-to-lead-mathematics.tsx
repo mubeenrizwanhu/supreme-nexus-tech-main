@@ -39,7 +39,7 @@ function SpeedToLeadArticle() {
   });
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white selection:bg-cyan-500/30 overflow-x-hidden relative pb-28">
+    <div className="min-h-screen bg-background text-foreground selection:bg-[color:var(--primary)]/30 overflow-x-hidden relative pb-28">
       {/* Scroll Progress Indicator */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-[color:var(--primary)] z-[60] origin-[0%]"
@@ -47,18 +47,18 @@ function SpeedToLeadArticle() {
       />
 
       {/* Background Ambience */}
-      <div className="absolute top-[10%] left-[-15%] w-[40%] h-[40%] bg-emerald-500/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-15%] w-[40%] h-[40%] bg-teal-500/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[10%] left-[-15%] w-[40%] h-[40%] bg-[color:var(--primary)]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-15%] w-[40%] h-[40%] bg-[color:var(--accent-blue)]/5 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Floating navigation header */}
-      <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#020202]/40 backdrop-blur-xl transition-all duration-300">
+      <nav className="fixed inset-x-0 top-0 z-50 border-b border-[color:var(--border)] bg-background/40 backdrop-blur-xl transition-all duration-300">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
-          <Link to="/articles" className="flex items-center gap-2 group text-sm font-semibold tracking-wide text-white/60 hover:text-white transition-colors">
+          <Link to="/articles" className="flex items-center gap-2 group text-sm font-semibold tracking-wide text-muted hover:text-foreground transition-colors">
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Insights
           </Link>
           <Link to="/" className="flex items-center gap-3 group">
-            <span className="font-brand text-[15px] tracking-wide text-white uppercase">
+            <span className="font-brand text-[15px] tracking-wide text-foreground uppercase">
               SUPREME <span className="text-[color:var(--primary)]">NEXUS</span>
             </span>
           </Link>
@@ -82,24 +82,24 @@ function SpeedToLeadArticle() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1 rounded-full mb-6">
-            <span className="text-[10px] font-mono font-bold tracking-[0.18em] text-emerald-400 uppercase">PIPELINE VELOCITY</span>
+          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-1 rounded-full mb-6">
+            <span className="text-[10px] font-mono font-bold tracking-[0.18em] text-primary uppercase">PIPELINE VELOCITY</span>
           </div>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mb-8 leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 italic">
             Speed to Lead: The Mathematics of the 5-Minute Response Window
           </h1>
 
-          <div className="flex flex-wrap items-center gap-6 border-y border-white/5 py-4 text-sm text-white/40 font-mono">
+          <div className="flex flex-wrap items-center gap-6 border-y border-[color:var(--border)] py-4 text-sm text-muted font-mono">
             <div className="flex items-center gap-2">
-              <span className="text-white/70">Published:</span> Q2 2026
+              <span className="text-foreground/70">Published:</span> Q2 2026
             </div>
-            <div className="h-3 w-px bg-white/10 hidden sm:block" />
+            <div className="h-3 w-px bg-[color:var(--border)] hidden sm:block" />
             <div className="flex items-center gap-2">
-              <span className="text-white/70">Author:</span> Supreme Nexus Editorial
+              <span className="text-foreground/70">Author:</span> Supreme Nexus Editorial
             </div>
-            <div className="h-3 w-px bg-white/10 hidden sm:block" />
+            <div className="h-3 w-px bg-[color:var(--border)] hidden sm:block" />
             <div className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-emerald-400" />
+              <Clock className="w-4 h-4 text-primary" />
               <span>5 min read</span>
             </div>
           </div>
@@ -112,9 +112,9 @@ function SpeedToLeadArticle() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="prose prose-invert max-w-none prose-p:text-white/70 prose-p:leading-relaxed prose-p:text-[15px] prose-p:md:text-[16px] prose-p:font-light prose-h2:font-display prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-white prose-strong:text-white prose-ul:list-disc prose-ul:pl-6 prose-li:text-white/70 prose-li:mb-2 prose-li:text-[15px] prose-li:md:text-[16px]"
+          className="prose prose-invert max-w-none prose-p:text-foreground/80 prose-p:leading-relaxed prose-p:text-[15px] prose-p:md:text-[16px] prose-p:font-light prose-h2:font-display prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-foreground prose-strong:text-foreground prose-ul:list-disc prose-ul:pl-6 prose-li:text-foreground/80 prose-li:mb-2 prose-li:text-[15px] prose-li:md:text-[16px]"
         >
-          <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light italic mb-10 border-l-2 border-emerald-500/40 pl-6">
+          <p className="text-lg md:text-xl text-foreground/90 leading-relaxed font-light italic mb-10 border-l-2 border-primary/40 pl-6">
             In modern pipeline engineering, minutes represent money. Waiting even an hour to respond to an inbound business inquiry decreases contact likelihood by 10x. Here, we outline the exact statistical decay curve of active lead intent and show how you can secure a 391% conversion boost using automation.
           </p>
 
@@ -127,18 +127,18 @@ function SpeedToLeadArticle() {
           </p>
 
           {/* Mathematical Callout Box */}
-          <div className="my-10 rounded-3xl border border-emerald-500/20 bg-emerald-500/5 backdrop-blur-md p-8">
+          <div className="my-10 rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-md p-8">
             <div className="flex items-center gap-3 mb-4">
-              <Calculator className="w-5 h-5 text-emerald-400" />
-              <h4 className="text-base font-bold text-white font-mono uppercase tracking-wider">The Intent Decay Formula</h4>
+              <Calculator className="w-5 h-5 text-primary" />
+              <h4 className="text-base font-bold text-foreground font-mono uppercase tracking-wider">The Intent Decay Formula</h4>
             </div>
-            <p className="text-sm text-white/70 leading-relaxed font-light mb-4">
+            <p className="text-sm text-foreground/80 leading-relaxed font-light mb-4">
               We model this phenomenon using a standard half-life decay function where psychological intent (I) as a function of time (t in minutes) decays exponentially:
             </p>
-            <div className="w-full bg-black/60 py-4 rounded-xl border border-white/5 font-mono text-center text-lg md:text-xl text-emerald-400 mb-2">
+            <div className="w-full bg-surface/30 py-4 rounded-xl border border-[color:var(--border)] font-mono text-center text-lg md:text-xl text-primary mb-2">
               I(t) = I₀ · e^-λt
             </div>
-            <p className="text-xs text-white/50 leading-relaxed font-light">
+            <p className="text-xs text-muted leading-relaxed font-light">
               Where I₀ represents initial peak intent, and λ (lambda) represents the decay coefficient. Empirically, the half-life of qualified sales intent in B2B service sectors is approximately **15 minutes**.
             </p>
           </div>
@@ -155,23 +155,23 @@ function SpeedToLeadArticle() {
 
           {/* Frosted Grid Layout for Speed statistics */}
           <div className="grid gap-6 my-10 md:grid-cols-2">
-            <div className="border border-white/5 bg-white/[0.02] p-8 rounded-3xl relative overflow-hidden group hover:border-emerald-500/20 transition-all duration-300">
+            <div className="border border-[color:var(--border)] bg-surface/10 p-8 rounded-3xl relative overflow-hidden group hover:border-primary/40 transition-all duration-300">
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Zap className="w-24 h-24 text-emerald-400" />
+                <Zap className="w-24 h-24 text-primary" />
               </div>
-              <span className="font-mono text-emerald-400 text-sm font-bold block mb-2">/ THE WINNING LEVER</span>
-              <h3 className="text-white text-3xl font-black mb-2">391% Lift</h3>
-              <p className="text-xs text-white/60 leading-relaxed font-light">
+              <span className="font-mono text-primary text-sm font-bold block mb-2">/ THE WINNING LEVER</span>
+              <h3 className="text-foreground text-3xl font-black mb-2">391% Lift</h3>
+              <p className="text-xs text-muted leading-relaxed font-light">
                 The empirical improvement in lead-to-booking rates achieved by transitioning average response latency from 30 minutes down to less than 5 minutes.
               </p>
             </div>
-            <div className="border border-white/5 bg-white/[0.02] p-8 rounded-3xl relative overflow-hidden group hover:border-emerald-500/20 transition-all duration-300">
+            <div className="border border-[color:var(--border)] bg-surface/10 p-8 rounded-3xl relative overflow-hidden group hover:border-primary/40 transition-all duration-300">
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Clock className="w-24 h-24 text-emerald-400" />
+                <Clock className="w-24 h-24 text-primary" />
               </div>
-              <span className="font-mono text-emerald-400 text-sm font-bold block mb-2">/ THE COST OF DELAY</span>
-              <h3 className="text-white text-3xl font-black mb-2">10x Decay</h3>
-              <p className="text-xs text-white/60 leading-relaxed font-light">
+              <span className="font-mono text-primary text-sm font-bold block mb-2">/ THE COST OF DELAY</span>
+              <h3 className="text-foreground text-3xl font-black mb-2">10x Decay</h3>
+              <p className="text-xs text-muted leading-relaxed font-light">
                 The absolute drop in successful contact rates experienced between a 5-minute response window and a standard 30-minute delay.
               </p>
             </div>
@@ -198,7 +198,7 @@ function SpeedToLeadArticle() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mt-20 border border-white/5 bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-transparent rounded-[3rem] p-8 md:p-12 text-center relative overflow-hidden group shadow-2xl"
+          className="mt-20 border border-[color:var(--border)] bg-gradient-to-br from-primary/10 via-accent-blue/5 to-transparent rounded-[3rem] p-8 md:p-12 text-center relative overflow-hidden group shadow-2xl"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,color-mix(in_oklab,var(--primary)_15%,transparent),transparent_60%)] opacity-30 pointer-events-none" />
 

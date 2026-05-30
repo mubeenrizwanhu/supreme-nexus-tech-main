@@ -39,7 +39,7 @@ function FrictionlessFormsArticle() {
   });
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white selection:bg-cyan-500/30 overflow-x-hidden relative pb-28">
+    <div className="min-h-screen bg-background text-foreground selection:bg-[color:var(--primary)]/30 overflow-x-hidden relative pb-28">
       {/* Scroll Progress Indicator */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-[color:var(--primary)] z-[60] origin-[0%]"
@@ -47,18 +47,18 @@ function FrictionlessFormsArticle() {
       />
 
       {/* Background Ambience */}
-      <div className="absolute top-[10%] left-[-15%] w-[40%] h-[40%] bg-purple-500/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-15%] w-[40%] h-[40%] bg-indigo-500/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[10%] left-[-15%] w-[40%] h-[40%] bg-[color:var(--primary)]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-15%] w-[40%] h-[40%] bg-[color:var(--accent-blue)]/5 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Floating navigation header */}
-      <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#020202]/40 backdrop-blur-xl transition-all duration-300">
+      <nav className="fixed inset-x-0 top-0 z-50 border-b border-[color:var(--border)] bg-background/40 backdrop-blur-xl transition-all duration-300">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
-          <Link to="/articles" className="flex items-center gap-2 group text-sm font-semibold tracking-wide text-white/60 hover:text-white transition-colors">
+          <Link to="/articles" className="flex items-center gap-2 group text-sm font-semibold tracking-wide text-muted hover:text-foreground transition-colors">
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Insights
           </Link>
           <Link to="/" className="flex items-center gap-3 group">
-            <span className="font-brand text-[15px] tracking-wide text-white uppercase">
+            <span className="font-brand text-[15px] tracking-wide text-foreground uppercase">
               SUPREME <span className="text-[color:var(--primary)]">NEXUS</span>
             </span>
           </Link>
@@ -82,24 +82,24 @@ function FrictionlessFormsArticle() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 px-4 py-1 rounded-full mb-6">
-            <span className="text-[10px] font-mono font-bold tracking-[0.18em] text-purple-400 uppercase">CRO &amp; UI/UX</span>
+          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-1 rounded-full mb-6">
+            <span className="text-[10px] font-mono font-bold tracking-[0.18em] text-primary uppercase">CRO &amp; UI/UX</span>
           </div>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mb-8 leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 italic">
             Frictionless Conversion: Redesigning Forms for Maximum Lead Quality
           </h1>
 
-          <div className="flex flex-wrap items-center gap-6 border-y border-white/5 py-4 text-sm text-white/40 font-mono">
+          <div className="flex flex-wrap items-center gap-6 border-y border-[color:var(--border)] py-4 text-sm text-muted font-mono">
             <div className="flex items-center gap-2">
-              <span className="text-white/70">Published:</span> Q2 2026
+              <span className="text-foreground/70">Published:</span> Q2 2026
             </div>
-            <div className="h-3 w-px bg-white/10 hidden sm:block" />
+            <div className="h-3 w-px bg-[color:var(--border)] hidden sm:block" />
             <div className="flex items-center gap-2">
-              <span className="text-white/70">Author:</span> Supreme Nexus Editorial
+              <span className="text-foreground/70">Author:</span> Supreme Nexus Editorial
             </div>
-            <div className="h-3 w-px bg-white/10 hidden sm:block" />
+            <div className="h-3 w-px bg-[color:var(--border)] hidden sm:block" />
             <div className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-purple-400" />
+              <Clock className="w-4 h-4 text-primary" />
               <span>7 min read</span>
             </div>
           </div>
@@ -112,9 +112,9 @@ function FrictionlessFormsArticle() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="prose prose-invert max-w-none prose-p:text-white/70 prose-p:leading-relaxed prose-p:text-[15px] prose-p:md:text-[16px] prose-p:font-light prose-h2:font-display prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-white prose-strong:text-white prose-ul:list-disc prose-ul:pl-6 prose-li:text-white/70 prose-li:mb-2 prose-li:text-[15px] prose-li:md:text-[16px]"
+          className="prose prose-invert max-w-none prose-p:text-foreground/80 prose-p:leading-relaxed prose-p:text-[15px] prose-p:md:text-[16px] prose-p:font-light prose-h2:font-display prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-foreground prose-strong:text-foreground prose-ul:list-disc prose-ul:pl-6 prose-li:text-foreground/80 prose-li:mb-2 prose-li:text-[15px] prose-li:md:text-[16px]"
         >
-          <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light italic mb-10 border-l-2 border-purple-500/40 pl-6">
+          <p className="text-lg md:text-xl text-foreground/90 leading-relaxed font-light italic mb-10 border-l-2 border-primary/40 pl-6">
             The lead generation form is the ultimate barrier between your marketing investment and your sales pipeline. Yet, many businesses treat forms as dry database schemas rather than dynamic, psychological conversations. Discover how to balance field constraints with conversion rate optimization.
           </p>
 
@@ -127,13 +127,13 @@ function FrictionlessFormsArticle() {
           </p>
 
           {/* Form Statistics callout */}
-          <div className="my-10 border border-white/5 bg-white/[0.02] p-8 rounded-3xl relative overflow-hidden group hover:border-purple-500/20 transition-all duration-300">
+          <div className="my-10 border border-[color:var(--border)] bg-surface/10 p-8 rounded-3xl relative overflow-hidden group hover:border-primary/40 transition-all duration-300">
             <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-              <ClipboardList className="w-24 h-24 text-purple-400" />
+              <ClipboardList className="w-24 h-24 text-primary" />
             </div>
-            <span className="font-mono text-purple-400 text-sm font-bold block mb-2">/ DYNAMIC REDESIGN DATA</span>
-            <h3 className="text-white text-3xl font-black mb-2">4 Static vs. 9 Dynamic</h3>
-            <p className="text-sm text-white/60 leading-relaxed font-light">
+            <span className="font-mono text-primary text-sm font-bold block mb-2">/ DYNAMIC REDESIGN DATA</span>
+            <h3 className="text-foreground text-3xl font-black mb-2">4 Static vs. 9 Dynamic</h3>
+            <p className="text-xs text-muted leading-relaxed font-light">
               We found that presenting a 4-field initial form and then progressively requesting details via multi-step, animated inputs increased overall booking volumes by **120%** while maintaining identical data qualification density.
             </p>
           </div>
@@ -144,46 +144,46 @@ function FrictionlessFormsArticle() {
           </p>
 
           <div className="space-y-4 my-10">
-            <div className="flex gap-4 items-start border border-white/5 bg-white/[0.01] p-6 rounded-2xl">
-              <div className="h-8 w-8 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center font-mono font-bold text-purple-400 shrink-0">
+            <div className="flex gap-4 items-start border border-[color:var(--border)] bg-surface/10 p-6 rounded-2xl">
+              <div className="h-8 w-8 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center font-mono font-bold text-primary shrink-0">
                 1
               </div>
               <div>
-                <h4 className="text-white font-bold mb-1">Establish Mutual Commit First</h4>
-                <p className="text-xs text-white/60 leading-relaxed font-light">
+                <h4 className="text-foreground font-bold mb-1">Establish Mutual Commit First</h4>
+                <p className="text-xs text-muted leading-relaxed font-light">
                   Ask low-risk, zero-privacy questions in step one (e.g., website domain or current growth objectives). This establishes micro-commitment and psychological momentum.
                 </p>
               </div>
             </div>
-            <div className="flex gap-4 items-start border border-white/5 bg-white/[0.01] p-6 rounded-2xl">
-              <div className="h-8 w-8 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center font-mono font-bold text-purple-400 shrink-0">
+            <div className="flex gap-4 items-start border border-[color:var(--border)] bg-surface/10 p-6 rounded-2xl">
+              <div className="h-8 w-8 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center font-mono font-bold text-primary shrink-0">
                 2
               </div>
               <div>
-                <h4 className="text-white font-bold mb-1">Isolate Cognitive Load</h4>
-                <p className="text-xs text-white/60 leading-relaxed font-light">
+                <h4 className="text-foreground font-bold mb-1">Isolate Cognitive Load</h4>
+                <p className="text-xs text-muted leading-relaxed font-light">
                   Never show more than two input fields on a single screen layout. Multi-step animations keep focus intense and reduce visual overwhelm.
                 </p>
               </div>
             </div>
-            <div className="flex gap-4 items-start border border-white/5 bg-white/[0.01] p-6 rounded-2xl">
-              <div className="h-8 w-8 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center font-mono font-bold text-purple-400 shrink-0">
+            <div className="flex gap-4 items-start border border-[color:var(--border)] bg-surface/10 p-6 rounded-2xl">
+              <div className="h-8 w-8 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center font-mono font-bold text-primary shrink-0">
                 3
               </div>
               <div>
-                <h4 className="text-white font-bold mb-1">Provide Inline Factual Validation</h4>
-                <p className="text-xs text-white/60 leading-relaxed font-light">
+                <h4 className="text-foreground font-bold mb-1">Provide Inline Factual Validation</h4>
+                <p className="text-xs text-muted leading-relaxed font-light">
                   Validate email formats, domain lookups, and telephone formats in real-time, displaying friendly UI ticks. Never make a user submit the form to see an error.
                 </p>
               </div>
             </div>
-            <div className="flex gap-4 items-start border border-white/5 bg-white/[0.01] p-6 rounded-2xl">
-              <div className="h-8 w-8 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center font-mono font-bold text-purple-400 shrink-0">
+            <div className="flex gap-4 items-start border border-[color:var(--border)] bg-surface/10 p-6 rounded-2xl">
+              <div className="h-8 w-8 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center font-mono font-bold text-primary shrink-0">
                 4
               </div>
               <div>
-                <h4 className="text-white font-bold mb-1">Incentivize Completion</h4>
-                <p className="text-xs text-white/60 leading-relaxed font-light">
+                <h4 className="text-foreground font-bold mb-1">Incentivize Completion</h4>
+                <p className="text-xs text-muted leading-relaxed font-light">
                   Add clear security seals (e.g., standard encrypted locks, privacy pledges) directly below high-risk fields to soothe corporate security anxieties.
                 </p>
               </div>
@@ -205,7 +205,7 @@ function FrictionlessFormsArticle() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mt-20 border border-white/5 bg-gradient-to-br from-purple-500/10 via-indigo-500/5 to-transparent rounded-[3rem] p-8 md:p-12 text-center relative overflow-hidden group shadow-2xl"
+          className="mt-20 border border-[color:var(--border)] bg-gradient-to-br from-primary/10 via-accent-blue/5 to-transparent rounded-[3rem] p-8 md:p-12 text-center relative overflow-hidden group shadow-2xl"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,color-mix(in_oklab,var(--primary)_15%,transparent),transparent_60%)] opacity-30 pointer-events-none" />
 
