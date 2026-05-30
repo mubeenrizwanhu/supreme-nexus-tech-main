@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Disallow: /dist/
+Disallow: /node_modules/
+
+# Welcoming and optimizing for AI GEO Indexers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap Target
+Sitemap: https://supremenexus.tech/sitemap.xml
