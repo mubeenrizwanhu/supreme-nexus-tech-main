@@ -1627,9 +1627,124 @@ function MobileStickyCTA() {
   );
 }
 
+const SCHEMA_MARKUP = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://supremenexus.tech/#service",
+      "name": "Supreme Nexus",
+      "url": "https://supremenexus.tech",
+      "logo": "https://supremenexus.tech/logo.png",
+      "image": "https://supremenexus.tech/logo.png",
+      "description": "Supreme Nexus builds conversion systems that turn traffic into qualified leads, pipeline velocity, and booked strategy calls.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US"
+      },
+      "knowsAbout": [
+        "Conversion Rate Optimization",
+        "Lead Generation Systems",
+        "Funnel Optimization",
+        "B2B Growth Marketing",
+        "Appointment Setting Automation"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://supremenexus.tech/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is this for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Supreme Nexus is designed specifically for high-growth B2B service providers, coaches, and appointment-centric businesses who already generate traffic but need to convert a higher percentage of it into qualified sales meetings and pipeline velocity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How fast can we start?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We typically initiate engagements within one week of our strategy call. Our empirical conversion and funnel audits are completed and delivered within the first 7 to 10 days of the engagement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with existing funnels and websites?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most of our work involves auditing, optimizing, and rebuilding the conversion layers of your existing marketing stack and pages, avoiding the delays and costs of a complete ground-up website redesign."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kind of businesses benefit most?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "B2B service businesses, agencies, coaching companies, and any business model reliant on qualified sales calls to sell high-value packages or retainers benefit the most from our structured conversion systems."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens on the strategy call?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On the call, we conduct a diagnostic audit of your current conversion pathways. We will identify clear conversion leaks and map out a step-by-step optimization plan to accelerate your booked sales pipeline, without any pushy sales pitch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a conversion leak in a sales funnel, and how do you identify it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A conversion leak is any point in a marketing or sales funnel where qualified prospects drop off instead of taking the next action. Supreme Nexus identifies leaks through empirical conversion tracking audits, form analytics, user behavior analysis, and lifecycle messaging speed audits."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Supreme Nexus increase landing page conversion rates without changing our traffic source?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We increase conversion rates by reducing cognitive load, optimizing information hierarchy, streamlining form fields, and aligning messaging directly with user intent. By removing friction and engineering clear conversion pathways, we capture more value from your existing traffic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does lead response time matter for B2B pipeline velocity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lead response time is critical for B2B pipeline velocity because contact rates decline by over 10x if the lead is not contacted within the first five minutes. Immediate follow-up capitalizes on peak buyer intent, drastically increasing the transition rate from marketing-qualified leads to sales-qualified meetings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between traffic acquisition and funnel optimization?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Traffic acquisition focuses on driving new visitors to your digital properties through paid ads, organic SEO, or outbound campaigns. Funnel optimization (or CRO) focuses on maximizing the value of those visitors by ensuring a friction-free transition from visitor to qualified booking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What key performance indicators (KPIs) do you track during an engagement?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We track rigorous bottom-line metrics, including landing page conversion rate (LP CVR), average lead response latency, sales-qualified lead (SQL) transition rates, customer acquisition cost (CAC) reduction, and overall booked strategy call volume."
+          }
+        }
+      ]
+    }
+  ]
+};
+
 function Index() {
   return (
     <div className="min-h-screen bg-transparent text-foreground">
+      <script type="application/ld+json">
+        {JSON.stringify(SCHEMA_MARKUP)}
+      </script>
       <LoadingScreen />
       <Header />
       <main>
