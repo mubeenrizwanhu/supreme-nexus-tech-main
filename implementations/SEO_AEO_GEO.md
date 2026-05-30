@@ -25,7 +25,7 @@ graph TD
   - [x] 1.3 Footer "Freshness" Signal
 - [x] **2. In-Code Structured Data Injection (JSON-LD)**
 - [x] **3. Metadata & Page Audit Setup**
-- [ ] **4. Complete Sitemap Mapping (`sitemap.xml`)**
+- [x] **4. Complete Sitemap Mapping (`sitemap.xml`)**
 - [ ] **5. Gatekeeping Rules (`robots.txt`)**
 - [ ] **6. SPA Pre-rendering Setup**
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home Landing Page -->
+  <url>
+    <loc>https://supremenexus.tech/</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Favicon Lab Tool -->
+  <url>
+    <loc>https://supremenexus.tech/favicon-editor</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Articles Hub -->
+  <url>
+    <loc>https://supremenexus.tech/articles</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Article 1: Funnel Leaks -->
+  <url>
+    <loc>https://supremenexus.tech/articles/leaky-bucket-funnels</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Article 2: Speed to Lead -->
+  <url>
+    <loc>https://supremenexus.tech/articles/speed-to-lead-mathematics</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Article 3: Frictionless Forms -->
+  <url>
+    <loc>https://supremenexus.tech/articles/frictionless-form-design</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
