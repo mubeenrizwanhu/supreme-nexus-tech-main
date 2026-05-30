@@ -820,24 +820,44 @@ function Results() {
 const FAQS = [
   {
     q: "Who is this for?",
-    a: "Service businesses and growth-focused companies that already have traffic and an offer, but aren't converting enough of it into booked calls.",
+    a: "Supreme Nexus is designed specifically for high-growth B2B service providers, coaches, and appointment-centric businesses who already generate traffic but need to convert a higher percentage of it into qualified sales meetings and pipeline velocity.",
   },
   {
     q: "How fast can we start?",
-    a: "Engagements typically begin within a week of the strategy call. The initial audit lands in the first 7–10 days.",
+    a: "We typically initiate engagements within one week of our strategy call. Our empirical conversion and funnel audits are completed and delivered within the first 7 to 10 days of the engagement.",
   },
   {
     q: "Do you work with existing funnels and websites?",
-    a: "Yes. Most of our work is rebuilding and optimizing what you already have, not starting from scratch.",
+    a: "Yes. Most of our work involves auditing, optimizing, and rebuilding the conversion layers of your existing marketing stack and pages, avoiding the delays and costs of a complete ground-up website redesign.",
   },
   {
     q: "What kind of businesses benefit most?",
-    a: "Service businesses with an established offer, paid or organic traffic, and a clear booking-driven sales motion.",
+    a: "B2B service businesses, agencies, coaching companies, and any business model reliant on qualified sales calls to sell high-value packages or retainers benefit the most from our structured conversion systems.",
   },
   {
     q: "What happens on the strategy call?",
-    a: "We diagnose where your funnel is leaking, identify the highest-leverage fixes, and outline what an engagement would look like. No pitch deck, no fluff.",
+    a: "On the call, we conduct a diagnostic audit of your current conversion pathways. We will identify clear conversion leaks and map out a step-by-step optimization plan to accelerate your booked sales pipeline, without any pushy sales pitch.",
   },
+  {
+    q: "What is a conversion leak in a sales funnel, and how do you identify it?",
+    a: "A conversion leak is any point in a marketing or sales funnel where qualified prospects drop off instead of taking the next action. Supreme Nexus identifies leaks through empirical conversion tracking audits, form analytics, user behavior analysis, and lifecycle messaging speed audits.",
+  },
+  {
+    q: "How does Supreme Nexus increase landing page conversion rates without changing our traffic source?",
+    a: "We increase conversion rates by reducing cognitive load, optimizing information hierarchy, streamlining form fields, and aligning messaging directly with user intent. By removing friction and engineering clear conversion pathways, we capture more value from your existing traffic.",
+  },
+  {
+    q: "Why does lead response time matter for B2B pipeline velocity?",
+    a: "Lead response time is critical for B2B pipeline velocity because contact rates decline by over 10x if the lead is not contacted within the first five minutes. Immediate follow-up capitalizes on peak buyer intent, drastically increasing the transition rate from marketing-qualified leads to sales-qualified meetings.",
+  },
+  {
+    q: "What is the difference between traffic acquisition and funnel optimization?",
+    a: "Traffic acquisition focuses on driving new visitors to your digital properties through paid ads, organic SEO, or outbound campaigns. Funnel optimization (or CRO) focuses on maximizing the value of those visitors by ensuring a friction-free transition from visitor to qualified booking.",
+  },
+  {
+    q: "What key performance indicators (KPIs) do you track during an engagement?",
+    a: "We track rigorous bottom-line metrics, including landing page conversion rate (LP CVR), average lead response latency, sales-qualified lead (SQL) transition rates, customer acquisition cost (CAC) reduction, and overall booked strategy call volume.",
+  }
 ];
 
 function FAQ() {
@@ -919,7 +939,7 @@ function FAQ() {
                   <AccordionTrigger className="py-6 text-left font-display text-base font-semibold text-foreground hover:no-underline md:text-lg group-hover:text-[color:var(--primary)] transition-colors duration-300">
                     <span className="flex items-center gap-4">
                       <span className="font-mono text-[10px] text-muted group-hover:text-[color:var(--primary)]/60 transition-colors">
-                        /0{i + 1}
+                        /{i + 1 < 10 ? `0${i + 1}` : i + 1}
                       </span>
                       {f.q}
                     </span>
