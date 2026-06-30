@@ -91,7 +91,7 @@ function CTAButton({
     <MagneticButton className={isFullWidth ? "w-full" : ""}>
       <a
         href="#book"
-        className={`group inline-flex items-center justify-center gap-2 rounded-xl bg-primary font-semibold text-primary-foreground transition-all duration-200 cta-glow hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${sizing} ${className}`}
+        className={`font-brand group inline-flex items-center justify-center gap-2 rounded-xl bg-primary font-normal text-primary-foreground transition-all duration-200 cta-glow hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${sizing} ${className}`}
       >
         {children}
         <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />

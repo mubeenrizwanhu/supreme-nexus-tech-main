@@ -66,7 +66,7 @@ function SpeedToLeadArticle() {
             <Link
               to="/"
               hash="book"
-              className="group inline-flex h-9 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-xs font-semibold text-primary-foreground transition-all duration-200 cta-glow hover:-translate-y-0.5"
+              className="font-brand group inline-flex h-9 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-xs font-normal text-primary-foreground transition-all duration-200 cta-glow hover:-translate-y-0.5"
             >
               Book Strategy Call
               <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -214,7 +214,7 @@ function SpeedToLeadArticle() {
               <Link
                 to="/"
                 hash="book"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-8 font-semibold text-primary-foreground transition-all duration-200 cta-glow hover:-translate-y-0.5"
+                className="font-brand group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-8 font-normal text-primary-foreground transition-all duration-200 cta-glow hover:-translate-y-0.5"
               >
                 Schedule Your Integration Call
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
